@@ -47,17 +47,17 @@
             padding: 10px 14px;
             border: 1.5px solid var(--border);
             border-radius: 10px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             background: #ffffff;
             transition: 0.15s;
             font-family: inherit;
             width: 100%;
             -webkit-appearance: none;
             appearance: none;
-            height: 46px;
+            height: 44px;
             color: var(--text);
         }
-        .form-item textarea { height: 64px; resize: vertical; min-height: 46px; max-height: 160px; }
+        .form-item textarea { height: 62px; resize: vertical; min-height: 44px; max-height: 160px; }
         .form-item input:focus, .form-item select:focus, .form-item textarea:focus {
             border-color: var(--primary);
             outline: none;
@@ -69,12 +69,13 @@
             background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
         }
 
+        /* 下拉：字体统一为 0.85rem */
         .dropdown-multi { position: relative; width: 100%; }
         .dropdown-multi .selected-display {
             display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px;
             padding: 6px 36px 6px 12px;
             border: 1.5px solid var(--border); border-radius: 10px;
-            background: #ffffff; min-height: 46px;
+            background: #ffffff; min-height: 44px;
             cursor: pointer; user-select: none; position: relative;
             font-size: 0.85rem;
         }
@@ -102,7 +103,7 @@
         .dropdown-multi .dropdown-panel.open { display: block; }
         .dropdown-multi .dropdown-panel label {
             display: flex; align-items: center; gap: 8px;
-            padding: 9px 14px; font-size: 0.85rem; cursor: pointer;
+            padding: 8px 14px; font-size: 0.85rem; cursor: pointer;
         }
         .dropdown-multi .dropdown-panel label:hover { background: var(--primary-light); }
         .dropdown-multi .dropdown-panel label input[type="checkbox"] {
@@ -123,8 +124,9 @@
         .btn-sm-danger { padding: 6px 14px; font-size: 0.75rem; background: #c0392b; color: white; border: none; border-radius: 20px; cursor: pointer; white-space: nowrap; height: 32px; display: inline-flex; align-items: center; font-weight: 600; }
         .btn-sm-danger:active { background: #a93226; }
 
+        /* 按钮区：电脑 3 列，手机 2 列 */
         .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; border-top: 2px solid var(--border); padding-top: 18px; }
-        .actions .btn { flex: 1 1 calc(33.333% - 8px); min-width: 90px; height: 48px; font-size: 0.88rem; }
+        .actions .btn { flex: 1 1 calc(33.333% - 8px); min-width: 90px; height: 46px; font-size: 0.88rem; }
 
         .preview-box { margin-top: 18px; background: var(--primary-bg); border-radius: 14px; border: 1.5px solid var(--border); overflow: hidden; }
         .preview-header { background: var(--primary-light); padding: 10px 16px; font-size: 0.82rem; font-weight: 700; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border); flex-wrap: wrap; gap: 8px; }
@@ -207,6 +209,7 @@
 
         .conflict-icon { color: #c0392b; font-weight: 700; margin-left: 4px; font-size: 0.9rem; }
 
+        /* ========== 手机端：按钮 2 列，三列防护改单列 ========== */
         @media (max-width: 600px) {
             html { font-size: 20px; }
             body { padding: 8px 6px 20px; }
@@ -215,12 +218,19 @@
             .header h1 small { font-size: 0.8rem; }
             .form-grid { grid-template-columns: 1fr 1fr; gap: 10px 12px; }
             .form-item.three-col { grid-template-columns: 1fr; gap: 10px; }
-            .actions .btn { flex: 1 1 calc(50% - 5px); font-size: 0.82rem; height: 44px; min-width: 0; }
+            /* 按钮 2 列 */
+            .actions .btn {
+                flex: 1 1 calc(50% - 5px) !important;
+                font-size: 0.82rem !important;
+                height: 44px !important;
+                min-width: 0 !important;
+            }
             .form-item label { font-size: 0.8rem; }
-            .form-item input, .form-item select, .form-item textarea { font-size: 0.88rem; height: 44px; padding: 8px 10px; }
-            .form-item textarea { height: 56px; min-height: 44px; }
-            .dropdown-multi .selected-display { min-height: 44px; padding: 4px 30px 4px 10px; font-size: 0.82rem; }
+            .form-item input, .form-item select, .form-item textarea { font-size: 0.85rem; height: 42px; padding: 8px 10px; }
+            .form-item textarea { height: 54px; min-height: 42px; }
+            .dropdown-multi .selected-display { min-height: 42px; padding: 4px 30px 4px 10px; font-size: 0.82rem; }
             .dropdown-multi .selected-display .tag { font-size: 0.68rem; padding: 1px 7px; }
+            .dropdown-multi .dropdown-panel label { font-size: 0.82rem; padding: 7px 12px; }
         }
         @media (max-width: 400px) {
             html { font-size: 18px; }
@@ -228,9 +238,9 @@
             .container { padding: 14px 10px 18px; }
             .header h1 { font-size: 1.3rem; }
             .form-grid { grid-template-columns: 1fr 1fr; gap: 8px 8px; }
-            .actions .btn { flex: 1 1 calc(50% - 4px); font-size: 0.78rem; height: 42px; }
-            .form-item input, .form-item select, .form-item textarea { font-size: 0.85rem; height: 42px; padding: 6px 8px; }
-            .dropdown-multi .selected-display { min-height: 42px; padding: 3px 28px 3px 8px; font-size: 0.78rem; }
+            .actions .btn { flex: 1 1 calc(50% - 4px) !important; font-size: 0.78rem !important; height: 42px !important; }
+            .form-item input, .form-item select, .form-item textarea { font-size: 0.82rem; height: 40px; padding: 6px 8px; }
+            .dropdown-multi .selected-display { min-height: 40px; padding: 3px 28px 3px 8px; font-size: 0.78rem; }
             .dropdown-multi .selected-display .tag { font-size: 0.65rem; padding: 1px 6px; }
         }
     </style>
@@ -320,7 +330,8 @@
                     </div>
                 </div>
                 <div>
-                    <label>远方防护 <span class="text-muted">（可选）</span><span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
+                    <!-- 已去掉“（可选）”文字 -->
+                    <label>远方防护 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
                     <dropdown-multi :options="guardFarOptionsWithCustom" v-model="currentPlan.guardFarList" placeholder="选择远方防护"></dropdown-multi>
                     <div class="add-row" v-if="showGuardFarCustom" style="margin-top:6px;">
                         <span class="text-muted">✏️ 自定义</span>
@@ -375,6 +386,7 @@
             <div class="form-item full"><label>其他人员</label><div class="other-persons-grid"><template v-if="otherPersonsFromWorkers.length"><span v-for="name in otherPersonsFromWorkers" :key="name" class="other-person-item"><span class="name">{{ name }}</span><input type="text" v-model="currentPlan.otherRemarkV2[name]" placeholder="备注" @input="refreshPreview" /></span></template><span v-else style="color:var(--text-light);font-size:0.78rem;grid-column:1/-1;text-align:center;padding:10px 0;">（所有人员均已担任角色或在作业人员列表中）</span></div></div>
         </div>
 
+        <!-- 按钮区 -->
         <div class="actions">
             <button class="btn btn-primary" @click="saveCurrentPlan">💾 保存</button>
             <button class="btn btn-primary" @click="generatePlan">📄 生成</button>
