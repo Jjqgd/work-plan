@@ -43,7 +43,6 @@
         .form-item label .required { color: #b22222; font-weight: 700; }
         .form-item label .text-muted { color: var(--text-light); font-weight: 400; font-size: 0.75rem; }
 
-        /* 所有输入框、下拉框统一 0.9rem */
         .form-item input, .form-item select, .form-item textarea {
             padding: 10px 14px;
             border: 1.5px solid var(--border);
@@ -72,15 +71,18 @@
             font-size: 0.9rem;
         }
 
-        /* ====== 多选下拉：样式与原生 select 完全一致 ====== */
+        /* ========== 下拉多选：外观与原生 select 完全一致 ========== */
         .dropdown-multi { position: relative; width: 100%; }
         .dropdown-multi .selected-display {
             display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px;
-            padding: 6px 40px 6px 14px;
-            border: 1.5px solid var(--border); border-radius: 10px;
-            background: #ffffff; min-height: 44px;
+            padding: 10px 40px 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            background: #ffffff;
+            min-height: 44px;
             cursor: pointer; user-select: none; position: relative;
             font-size: 0.9rem;
+            color: var(--text);
             transition: 0.15s;
         }
         .dropdown-multi .selected-display:focus,
@@ -89,7 +91,7 @@
             box-shadow: 0 0 0 3px rgba(58, 168, 168, 0.15);
             outline: none;
         }
-        /* 右侧青色三角箭头（与原生 select 一致） */
+        /* 右侧青色三角箭头：与原生 select 完全一致 */
         .dropdown-multi .selected-display::after {
             content: ''; position: absolute; right: 14px; top: 50%;
             transform: translateY(-50%);
@@ -221,7 +223,6 @@
 
         .conflict-icon { color: #c0392b; font-weight: 700; margin-left: 4px; font-size: 0.9rem; }
 
-        /* ===== 手机端：按钮 2 列 ===== */
         @media (max-width: 600px) {
             html { font-size: 20px; }
             body { padding: 8px 6px 20px; }
@@ -233,10 +234,9 @@
             .form-item label { font-size: 0.8rem; }
             .form-item input, .form-item select, .form-item textarea { font-size: 0.85rem; height: 44px; padding: 8px 10px; }
             .form-item textarea { height: 54px; min-height: 44px; }
-            .dropdown-multi .selected-display { min-height: 44px; padding: 4px 36px 4px 10px; font-size: 0.85rem; }
+            .dropdown-multi .selected-display { min-height: 44px; padding: 8px 36px 8px 10px; font-size: 0.85rem; }
             .dropdown-multi .selected-display .tag { font-size: 0.68rem; padding: 1px 7px; }
             .dropdown-multi .dropdown-panel label { font-size: 0.85rem; padding: 8px 12px; }
-            /* 按钮 2 列 */
             .actions {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
@@ -260,7 +260,7 @@
             .actions { grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
             .actions .btn { height: 42px !important; font-size: 0.75rem !important; }
             .form-item input, .form-item select, .form-item textarea { font-size: 0.82rem; height: 42px; padding: 6px 8px; }
-            .dropdown-multi .selected-display { min-height: 42px; padding: 3px 32px 3px 8px; font-size: 0.8rem; }
+            .dropdown-multi .selected-display { min-height: 42px; padding: 6px 32px 6px 8px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -414,7 +414,7 @@
                 toggleOption: function(opt, event) {
                     var checked = event.target.checked;
                     var val = this.getOptionValue(opt);
-                    var current = this.value || [];
+                    var current = this.value ? this.value.slice() : [];
                     if (checked) {
                         if (current.indexOf(val) === -1) current.push(val);
                         if (this.isTool) { this.$root.handleToolSelect(val); }
@@ -428,7 +428,7 @@
                     this.$root.refreshPreview();
                 },
                 removeItem: function(item) {
-                    var current = this.value || [];
+                    var current = this.value ? this.value.slice() : [];
                     var idx = current.indexOf(item);
                     if (idx !== -1) {
                         current.splice(idx, 1);
