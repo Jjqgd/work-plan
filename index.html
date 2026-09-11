@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>工务计划申报系统</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ffffff' stroke='%233aa8a8' stroke-width='4'/%3E%3Cpath d='M50 12 L50 88 M12 50 L88 50' stroke='%233aa8a8' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23ffffff' stroke='%233aa8a8' stroke-width='3'/%3E%3Cpath d='M35 35 L65 65 M65 35 L35 65' stroke='%233aa8a8' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='50' r='6' fill='%233aa8a8'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" href="logo.png" type="image/png">
     <style>
         :root {
             --primary: #3aa8a8;
@@ -21,9 +21,27 @@
         html { font-size: 22px; }
         body { background: var(--primary-bg); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif; padding: 16px 12px 28px; color: var(--text); font-size: 1rem; -webkit-font-smoothing: antialiased; }
         .container { max-width: 900px; margin: 0 auto; background: var(--white); border-radius: 18px; box-shadow: 0 4px 24px rgba(58, 168, 168, 0.08); padding: 24px 22px 28px; border: 1px solid var(--border); }
+
+        /* ===== 页头：路徽 + 标题居中 ===== */
         .header { text-align: center; border-bottom: 3px solid var(--primary); padding-bottom: 14px; margin-bottom: 14px; }
+        .header-logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .rail-icon-img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            flex-shrink: 0;
+            display: block;
+        }
+        .header-title-wrap {
+            text-align: center;
+        }
         .header h1 { font-size: 1.8rem; font-weight: 800; color: var(--primary-dark); letter-spacing: 3px; line-height: 1.3; }
-        .header h1 small { font-size: 0.85rem; font-weight: 500; color: var(--primary); letter-spacing: 2px; display: block; margin-top: 4px; }
         .header .plan-count { font-size: 0.8rem; color: var(--primary-dark); margin-top: 6px; border-top: 1px dashed var(--border); padding-top: 8px; font-weight: 500; }
         .header .save-status { font-size: 0.75rem; color: var(--primary); margin-top: 2px; }
 
@@ -47,7 +65,7 @@
             padding: 10px 14px;
             border: 1.5px solid var(--border);
             border-radius: 10px;
-            font-size: 0.9rem;
+            font-size: 0.82rem;
             background: #ffffff;
             transition: 0.15s;
             font-family: inherit;
@@ -68,10 +86,9 @@
             background-color: #ffffff;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233aa8a8' stroke-width='2' fill='none'/%3E%3C/svg%3E");
             background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
-            font-size: 0.9rem;
+            font-size: 0.82rem;
         }
 
-        /* ========== 下拉多选：外观与原生 select 完全一致 ========== */
         .dropdown-multi { position: relative; width: 100%; }
         .dropdown-multi .selected-display {
             display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px;
@@ -81,7 +98,7 @@
             background: #ffffff;
             min-height: 44px;
             cursor: pointer; user-select: none; position: relative;
-            font-size: 0.9rem;
+            font-size: 0.82rem;
             color: var(--text);
             transition: 0.15s;
         }
@@ -91,7 +108,6 @@
             box-shadow: 0 0 0 3px rgba(58, 168, 168, 0.15);
             outline: none;
         }
-        /* 右侧青色三角箭头：与原生 select 完全一致 */
         .dropdown-multi .selected-display::after {
             content: ''; position: absolute; right: 14px; top: 50%;
             transform: translateY(-50%);
@@ -99,15 +115,15 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233aa8a8' stroke-width='2' fill='none'/%3E%3C/svg%3E");
             background-repeat: no-repeat; background-position: center;
         }
-        .dropdown-multi .selected-display .placeholder { color: var(--text-light); font-size: 0.9rem; }
+        .dropdown-multi .selected-display .placeholder { color: var(--text-light); font-size: 0.82rem; }
         .dropdown-multi .selected-display .placeholder::before { content: '○ '; }
         .dropdown-multi .selected-display .tag {
             background: var(--primary); padding: 2px 8px; border-radius: 12px;
-            font-size: 0.72rem; display: inline-flex; align-items: center; gap: 4px;
+            font-size: 0.68rem; display: inline-flex; align-items: center; gap: 4px;
             color: var(--white); font-weight: 500; line-height: 1.4;
         }
         .dropdown-multi .selected-display .tag .del {
-            cursor: pointer; color: #d4f0f0; font-weight: 700; font-size: 0.85rem;
+            cursor: pointer; color: #d4f0f0; font-weight: 700; font-size: 0.8rem;
             background: none; border: none; line-height: 1; padding: 0 2px;
         }
         .dropdown-multi .dropdown-panel {
@@ -119,7 +135,7 @@
         .dropdown-multi .dropdown-panel.open { display: block; }
         .dropdown-multi .dropdown-panel label {
             display: flex; align-items: center; gap: 8px;
-            padding: 9px 14px; font-size: 0.9rem; cursor: pointer;
+            padding: 9px 14px; font-size: 0.82rem; cursor: pointer;
         }
         .dropdown-multi .dropdown-panel label:hover { background: var(--primary-light); }
         .dropdown-multi .dropdown-panel label input[type="checkbox"] {
@@ -135,9 +151,9 @@
         .btn-outline:active { background: var(--primary-light); }
         .btn-danger { background: #c0392b; color: white; }
         .btn-danger:active { background: #a93226; }
-        .btn-sm { padding: 6px 14px; font-size: 0.75rem; background: var(--primary-light); border: none; border-radius: 20px; cursor: pointer; white-space: nowrap; height: 32px; display: inline-flex; align-items: center; color: var(--primary-dark); font-weight: 600; }
+        .btn-sm { padding: 6px 14px; font-size: 0.72rem; background: var(--primary-light); border: none; border-radius: 20px; cursor: pointer; white-space: nowrap; height: 32px; display: inline-flex; align-items: center; color: var(--primary-dark); font-weight: 600; }
         .btn-sm:active { background: #d4f0f0; }
-        .btn-sm-danger { padding: 6px 14px; font-size: 0.75rem; background: #c0392b; color: white; border: none; border-radius: 20px; cursor: pointer; white-space: nowrap; height: 32px; display: inline-flex; align-items: center; font-weight: 600; }
+        .btn-sm-danger { padding: 6px 14px; font-size: 0.72rem; background: #c0392b; color: white; border: none; border-radius: 20px; cursor: pointer; white-space: nowrap; height: 32px; display: inline-flex; align-items: center; font-weight: 600; }
         .btn-sm-danger:active { background: #a93226; }
 
         .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; border-top: 2px solid var(--border); padding-top: 18px; }
@@ -145,7 +161,7 @@
 
         .preview-box { margin-top: 18px; background: var(--primary-bg); border-radius: 14px; border: 1.5px solid var(--border); overflow: hidden; }
         .preview-header { background: var(--primary-light); padding: 10px 16px; font-size: 0.82rem; font-weight: 700; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border); flex-wrap: wrap; gap: 8px; }
-        .rich-preview { background: var(--white); padding: 14px 18px; border-radius: 10px; font-size: 0.88rem; line-height: 2.2; color: var(--text); border: 1px solid var(--border); max-height: 460px; overflow-y: auto; }
+        .rich-preview { background: var(--white); padding: 14px 18px; border-radius: 10px; font-size: 0.85rem; line-height: 2.2; color: var(--text); border: 1px solid var(--border); max-height: 460px; overflow-y: auto; }
         .rich-preview .label { color: var(--primary-dark); font-weight: 700; }
         .rich-preview .title-line { font-size: 1.1rem; font-weight: 800; color: var(--primary-dark); text-align: center; padding: 6px 0 12px 0; border-bottom: 3px solid var(--primary); margin-bottom: 8px; letter-spacing: 1px; }
         .rich-preview .divider { border: none; border-top: 2px dashed var(--border); margin: 14px 0; }
@@ -157,11 +173,11 @@
 
         .text-muted { color: var(--text-light); font-size: 0.72rem; }
         .inline-flex { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
-        .inline-flex label { font-weight: 400; font-size: 0.82rem; display: flex; align-items: center; gap: 4px; cursor: pointer; padding: 6px 12px; border-radius: 20px; border: 1.5px solid transparent; transition: 0.15s; }
+        .inline-flex label { font-weight: 400; font-size: 0.8rem; display: flex; align-items: center; gap: 4px; cursor: pointer; padding: 6px 12px; border-radius: 20px; border: 1.5px solid transparent; transition: 0.15s; }
         .inline-flex label.radio-selected { background: var(--primary); color: white; border-color: var(--primary); }
         .inline-flex label.radio-selected input[type="radio"] { accent-color: white; }
         .inline-flex input[type="radio"] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
-        .inline-flex input[type="text"] { padding: 4px 8px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.82rem; width: 72px; height: 36px; background: #ffffff; }
+        .inline-flex input[type="text"] { padding: 4px 8px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.8rem; width: 72px; height: 36px; background: #ffffff; }
 
         .dup-error-banner { background: #fee; border: 1px solid #f5c6cb; color: #721c24; padding: 8px 12px; border-radius: 8px; font-size: 0.78rem; margin-top: 4px; }
         .station-display { margin-top: 4px; font-size: 0.78rem; color: var(--primary-dark); font-weight: 600; }
@@ -170,7 +186,7 @@
             display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
         }
         .time-row input, .mileage-row input, .gate-row input, .station-select-row select {
-            flex: 1; min-width: 70px; height: 40px; padding: 6px 10px; font-size: 0.85rem;
+            flex: 1; min-width: 70px; height: 40px; padding: 6px 10px; font-size: 0.82rem;
             border: 1.5px solid var(--border); border-radius: 8px; background: #ffffff;
         }
         .time-row .time-label, .mileage-row .mileage-label, .station-select-row .station-label {
@@ -185,13 +201,13 @@
         .tool-list { display: flex; flex-wrap: wrap; gap: 6px 10px; margin-top: 6px; align-items: center; }
         .tool-list .chip {
             background: var(--primary); padding: 4px 10px 4px 12px; border-radius: 16px;
-            font-size: 0.75rem; display: inline-flex; align-items: center; gap: 4px;
+            font-size: 0.72rem; display: inline-flex; align-items: center; gap: 4px;
             color: white; font-weight: 500;
         }
         .tool-list .chip .chip-name { margin-right: 2px; }
         .tool-list .chip .qty-input {
             width: 34px; padding: 2px 4px; border: none; border-left: 1.5px solid rgba(255,255,255,0.4);
-            background: transparent; color: white; font-size: 0.75rem; text-align: center; height: 24px;
+            background: transparent; color: white; font-size: 0.72rem; text-align: center; height: 24px;
             margin: 0 4px;
         }
         .tool-list .chip .qty-input:focus { outline: none; }
@@ -202,16 +218,16 @@
         }
 
         .camera-wrap { display: flex; flex-wrap: wrap; gap: 4px 10px; background: var(--primary-bg); padding: 8px 12px; border-radius: 10px; border: 1.5px solid var(--border); }
-        .camera-item { display: flex; align-items: center; gap: 3px; font-size: 0.75rem; flex-wrap: wrap; color: var(--primary-dark); }
-        .camera-item input[type="text"] { width: 56px; padding: 4px 6px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 0.75rem; height: 30px; background: white; }
+        .camera-item { display: flex; align-items: center; gap: 3px; font-size: 0.72rem; flex-wrap: wrap; color: var(--primary-dark); }
+        .camera-item input[type="text"] { width: 56px; padding: 4px 6px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 0.72rem; height: 30px; background: white; }
 
-        .other-person-item { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; flex-wrap: wrap; background: white; padding: 4px 10px; border-radius: 6px; border: 1.5px solid var(--border); }
+        .other-person-item { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; flex-wrap: wrap; background: white; padding: 4px 10px; border-radius: 6px; border: 1.5px solid var(--border); }
         .other-person-item .name { font-weight: 600; color: var(--primary-dark); min-width: 36px; }
-        .other-person-item input { flex: 1; min-width: 70px; padding: 4px 8px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 0.75rem; height: 30px; background: #ffffff; }
+        .other-person-item input { flex: 1; min-width: 70px; padding: 4px 8px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 0.72rem; height: 30px; background: #ffffff; }
 
         .leader-select-wrap { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-        .leader-select-wrap select { flex: 1; min-width: 90px; height: 40px; padding: 4px 28px 4px 10px; font-size: 0.85rem; border: 1.5px solid var(--border); border-radius: 8px; background: #ffffff; }
-        .leader-select-wrap input { width: 80px; height: 40px; padding: 4px 8px; font-size: 0.85rem; border: 1.5px solid var(--border); border-radius: 8px; background: #ffffff; }
+        .leader-select-wrap select { flex: 1; min-width: 90px; height: 44px; padding: 4px 28px 4px 10px; font-size: 0.82rem; border: 1.5px solid var(--border); border-radius: 10px; background: #ffffff; }
+        .leader-select-wrap input { width: 80px; height: 44px; padding: 4px 8px; font-size: 0.82rem; border: 1.5px solid var(--border); border-radius: 10px; background: #ffffff; }
 
         .add-row input { padding: 4px 10px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.82rem; flex: 1; min-width: 70px; height: 34px; background: #ffffff; }
 
@@ -222,34 +238,40 @@
         .other-persons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; background: var(--primary-bg); padding: 8px 12px; border-radius: 10px; border: 1.5px solid var(--border); min-height: 44px; }
 
         .conflict-icon { color: #c0392b; font-weight: 700; margin-left: 4px; font-size: 0.9rem; }
+        .clear-row { display: flex; justify-content: flex-end; margin-top: 6px; }
+
+        /* ===== 作业人数 + 其他人数 + 负责人 ===== */
+        .row-counts {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr;
+            gap: 12px 18px;
+        }
 
         @media (max-width: 600px) {
             html { font-size: 20px; }
             body { padding: 8px 6px 20px; }
             .container { padding: 18px 14px 22px; border-radius: 14px; }
             .header h1 { font-size: 1.5rem; letter-spacing: 2px; }
-            .header h1 small { font-size: 0.8rem; }
+            .header-logo-row { gap: 10px; }
+            .rail-icon-img { width: 44px; height: 44px; }
             .form-grid { grid-template-columns: 1fr 1fr; gap: 10px 12px; }
-            .form-item.three-col { grid-template-columns: 1fr; gap: 10px; }
+            .form-item.three-col { grid-template-columns: 1fr 1fr 1fr; gap: 8px 10px; }
             .form-item label { font-size: 0.8rem; }
-            .form-item input, .form-item select, .form-item textarea { font-size: 0.85rem; height: 44px; padding: 8px 10px; }
+            .form-item input, .form-item select, .form-item textarea { font-size: 0.78rem; height: 44px; padding: 8px 10px; }
             .form-item textarea { height: 54px; min-height: 44px; }
-            .dropdown-multi .selected-display { min-height: 44px; padding: 8px 36px 8px 10px; font-size: 0.85rem; }
-            .dropdown-multi .selected-display .tag { font-size: 0.68rem; padding: 1px 7px; }
-            .dropdown-multi .dropdown-panel label { font-size: 0.85rem; padding: 8px 12px; }
-            .actions {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 8px !important;
-            }
-            .actions .btn {
-                width: 100% !important;
-                min-width: 0 !important;
-                height: 44px !important;
-                font-size: 0.8rem !important;
-                padding: 0 6px !important;
-            }
+            .dropdown-multi .selected-display { min-height: 44px; padding: 8px 36px 8px 10px; font-size: 0.78rem; }
+            .dropdown-multi .selected-display .tag { font-size: 0.64rem; padding: 1px 7px; }
+            .dropdown-multi .dropdown-panel label { font-size: 0.78rem; padding: 8px 12px; }
+            .actions { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+            .actions .btn { width: 100% !important; min-width: 0 !important; height: 44px !important; font-size: 0.8rem !important; padding: 0 6px !important; }
             .actions .copy-feedback { grid-column: 1 / -1; }
+            /* 手机端：作业人数 + 其他人数 + 负责人 同一行（自适应） */
+            .row-counts {
+                grid-template-columns: 1fr 1fr 1.5fr !important;
+                gap: 6px 8px !important;
+            }
+            .row-counts .leader-select-wrap select { min-width: 0; font-size: 0.72rem; padding: 4px 22px 4px 6px; }
+            .row-counts .leader-select-wrap input { width: 50px; font-size: 0.72rem; }
         }
         @media (max-width: 400px) {
             html { font-size: 18px; }
@@ -257,19 +279,26 @@
             .container { padding: 14px 10px 18px; }
             .header h1 { font-size: 1.3rem; }
             .form-grid { grid-template-columns: 1fr 1fr; gap: 8px 8px; }
+            .form-item.three-col { grid-template-columns: 1fr 1fr 1fr; gap: 6px 8px; }
             .actions { grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
             .actions .btn { height: 42px !important; font-size: 0.75rem !important; }
-            .form-item input, .form-item select, .form-item textarea { font-size: 0.82rem; height: 42px; padding: 6px 8px; }
-            .dropdown-multi .selected-display { min-height: 42px; padding: 6px 32px 6px 8px; font-size: 0.8rem; }
+            .form-item input, .form-item select, .form-item textarea { font-size: 0.75rem; height: 42px; padding: 6px 8px; }
+            .dropdown-multi .selected-display { min-height: 42px; padding: 6px 32px 6px 8px; font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
     <div class="container" id="app">
+        <!-- ===== 页头：路徽 + 标题居中（无“湖口检查工区”） ===== -->
         <div class="header">
-            <h1>工务计划申报系统 <small>湖口检查工区</small></h1>
-            <div class="plan-count">共 {{ plans.length }} 条计划</div>
-            <div class="save-status" v-if="saveStatus">{{ saveStatus }}</div>
+            <div class="header-logo-row">
+                <img src="logo.png" alt="铁路路徽" class="rail-icon-img" />
+                <div class="header-title-wrap">
+                    <h1>工务计划申报系统</h1>
+                    <div class="plan-count">共 {{ plans.length }} 条计划</div>
+                    <div class="save-status" v-if="saveStatus">{{ saveStatus }}</div>
+                </div>
+            </div>
         </div>
 
         <div class="plan-tabs">
@@ -281,9 +310,26 @@
 
         <div class="form-grid" v-if="currentPlan">
             <div class="form-item"><label>作业日期</label><input type="date" v-model="currentPlan.date" @change="saveToLocal" /></div>
-            <div class="form-item"><label>作业类型</label><select v-model="currentPlan.planType" @change="onPlanTypeChange"><option value="点内检查">○ 点内检查</option><option value="点外检查">○ 点外检查</option><option value="栅栏网外">○ 栅栏网外</option><option value="点内维修">○ 点内维修</option><option value="点外维修">○ 点外维修</option><option value="非上道">○ 非上道</option></select></div>
+            <div class="form-item"><label>作业类型</label>
+                <select v-model="currentPlan.planType" @change="onPlanTypeChange">
+                    <option value="点内检查">○ 点内检查</option>
+                    <option value="点外检查">○ 点外检查</option>
+                    <option value="栅栏网外">○ 栅栏网外</option>
+                    <option value="点内维修">○ 点内维修</option>
+                    <option value="点外维修">○ 点外维修</option>
+                    <option value="施工维修">○ 施工维修</option>
+                    <option value="非上道">○ 非上道</option>
+                </select>
+            </div>
             
-            <div class="form-item" v-if="isPointIn"><label>天窗类型</label><select v-model="currentPlan.windowType" @change="refreshPreview"><option value="">○ 请选择</option><option value="高铁天窗">○ 高铁天窗</option><option value="普速天窗">○ 普速天窗</option></select></div>
+            <div class="form-item" v-if="isPointIn"><label>天窗类型</label>
+                <select v-model="currentPlan.windowType" @change="refreshPreview">
+                    <option value="">○ 请选择</option>
+                    <option value="高铁天窗">○ 高铁天窗</option>
+                    <option value="普速天窗">○ 普速天窗</option>
+                    <option value="临时要点">○ 临时要点</option>
+                </select>
+            </div>
             <div class="form-item" v-else style="visibility:hidden;"><label>占位</label><select style="background:var(--primary-light);border-color:transparent;"><option>—</option></select></div>
 
             <div class="form-item full"><label>作业时间</label><div class="time-row"><span class="time-label">起始</span><input type="text" v-model="currentPlan.timeStart" placeholder="如 22:00" @input="refreshPreview" /><span class="time-label">终止</span><input type="text" v-model="currentPlan.timeEnd" placeholder="如 01:00" @input="refreshPreview" /></div><div class="station-display" v-if="displayTime">⏰ {{ displayTime }}</div></div>
@@ -305,51 +351,63 @@
             <div class="form-item"><label>进网通道门</label><select v-model="currentPlan.gateIn" @change="refreshPreview"><option value="">○ 请选择</option><option v-for="g in filteredGateOptions" :key="g" :value="g">○ {{ g }}</option></select></div>
             <div class="form-item"><label>出网通道门</label><select v-model="currentPlan.gateOut" @change="refreshPreview"><option value="">○ 请选择</option><option v-for="g in filteredGateOptions" :key="g" :value="g">○ {{ g }}</option></select></div>
 
-            <div class="form-item full"><label>备用通道门 <span class="text-muted">（可选）</span></label>
-                <div class="gate-row">
-                    <select v-model="currentPlan.gateBackupSelect" @change="refreshPreview">
-                        <option value="">○ 请选择</option>
-                        <option v-for="g in filteredGateOptions" :key="g" :value="g">○ {{ g }}</option>
-                        <option value="__custom__">✏️ 自定义</option>
-                    </select>
-                    <input type="text" v-model="currentPlan.gateBackupCustom" placeholder="填写" @input="refreshPreview" v-if="currentPlan.gateBackupSelect === '__custom__'" style="flex:1;min-width:80px;" />
-                </div>
+            <div class="form-item full"><label>备用通道门 <span class="text-muted">（可多选）</span></label>
+                <dropdown-multi :options="filteredGateOptions" v-model="currentPlan.gateBackupList" placeholder="请选择"></dropdown-multi>
             </div>
 
-            <div class="form-item"><label>作业人数</label><input type="text" :value="workerCount" readonly /></div>
-            <div class="form-item"><label>负责人 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
-                <div class="leader-select-wrap">
-                    <select v-model="currentPlan.leader" @change="onRoleChange">
-                        <option value="">○ 请选择</option>
-                        <option v-for="name in leaderOptions" :key="name" :value="name">○ {{ name }}</option>
-                        <option value="__custom__">✏️ 自定义</option>
-                    </select>
-                    <input type="text" v-model="currentPlan.leaderCustom" placeholder="填写" @input="onRoleChange" v-if="currentPlan.leader === '__custom__'" />
+            <!-- 作业人数 + 其他人数 + 负责人 同一行 -->
+            <div class="form-item full">
+                <div class="row-counts">
+                    <div>
+                        <label>作业人数</label>
+                        <input type="text" :value="workerCount" readonly />
+                    </div>
+                    <div>
+                        <label>其他人数 <span class="text-muted">（自填）</span></label>
+                        <input type="number" v-model.number="currentPlan.otherCount" min="0" placeholder="0" @input="refreshPreview" />
+                    </div>
+                    <div>
+                        <label>负责人 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
+                        <div class="leader-select-wrap">
+                            <select v-model="currentPlan.leader" @change="onRoleChange">
+                                <option value="">○ 请选择</option>
+                                <option v-for="name in leaderOptions" :key="name" :value="name">○ {{ name }}</option>
+                                <option value="__custom__">✏️ 自定义</option>
+                            </select>
+                            <input type="text" v-model="currentPlan.leaderCustom" placeholder="填写" @input="onRoleChange" v-if="currentPlan.leader === '__custom__'" />
+                        </div>
+                        <div class="dup-error-banner" v-if="dupError">{{ dupError }}</div>
+                    </div>
                 </div>
-                <div class="dup-error-banner" v-if="dupError">{{ dupError }}</div>
             </div>
 
             <div class="form-item full" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px 18px;">
                 <div>
                     <label>驻站防护 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
-                    <dropdown-multi :options="guardStationOptionsWithCustom" v-model="currentPlan.guardStationList" placeholder="选择驻站防护"></dropdown-multi>
+                    <dropdown-multi :options="guardStationOptionsWithCustom" v-model="currentPlan.guardStationList" placeholder="请选择"></dropdown-multi>
                 </div>
                 <div>
                     <label>工地防护 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
-                    <dropdown-multi :options="guardSiteOptionsWithCustom" v-model="currentPlan.guardSiteList" placeholder="选择工地防护"></dropdown-multi>
+                    <dropdown-multi :options="guardSiteOptionsWithCustom" v-model="currentPlan.guardSiteList" placeholder="请选择"></dropdown-multi>
                 </div>
                 <div>
                     <label>远方防护 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
-                    <dropdown-multi :options="guardFarOptionsWithCustom" v-model="currentPlan.guardFarList" placeholder="选择远方防护"></dropdown-multi>
+                    <dropdown-multi :options="guardFarOptionsWithCustom" v-model="currentPlan.guardFarList" placeholder="请选择"></dropdown-multi>
                 </div>
             </div>
 
             <div class="form-item full"><label>作业人员 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
                 <dropdown-multi :options="workerOptionsWithCustom" v-model="currentPlan.workers" placeholder="选择作业人员"></dropdown-multi>
+                <div class="clear-row" v-if="currentPlan.workers && currentPlan.workers.length">
+                    <button class="btn-sm-danger" @click="clearAllWorkers">清除所有</button>
+                </div>
             </div>
 
             <div class="form-item full"><label>作业项目</label>
                 <dropdown-multi :options="workItemsOptionsWithCustom" v-model="currentPlan.workItems" placeholder="选择作业项目"></dropdown-multi>
+                <div class="clear-row" v-if="currentPlan.workItems && currentPlan.workItems.length">
+                    <button class="btn-sm-danger" @click="clearAllWorkItems">清除所有</button>
+                </div>
             </div>
 
             <div class="form-item full"><label>作业机具 <span class="text-muted">（勾选自动添加，数量可改）</span></label>
@@ -375,6 +433,10 @@
 
             <div class="form-item"><label>定位手机</label><div class="inline-flex"><label :class="{ 'radio-selected': currentPlan.phone === '3995' }"><input type="radio" value="3995" v-model="currentPlan.phone" @change="refreshPreview" /> 3995</label><label :class="{ 'radio-selected': currentPlan.phone === '3672' }"><input type="radio" value="3672" v-model="currentPlan.phone" @change="refreshPreview" /> 3672</label><label :class="{ 'radio-selected': currentPlan.phone === '__custom__' }"><input type="radio" value="__custom__" v-model="currentPlan.phone" @change="refreshPreview" /><input type="text" v-model="currentPlan.phoneCustom" placeholder="填写" @input="refreshPreview" /></label></div></div>
             <div class="form-item"><label>执法仪编号</label><div class="camera-wrap"><span v-for="name in allGuards" :key="name" class="camera-item">{{ name }} <input type="text" v-model="currentPlan.camera[name]" placeholder="编号" @input="refreshPreview" /></span><span class="camera-item">其他 <input type="text" v-model="currentPlan.cameraOtherName" placeholder="姓名" style="width:44px;" @input="refreshPreview" /> <input type="text" v-model="currentPlan.cameraOtherVal" placeholder="编号" style="width:44px;" @input="refreshPreview" /></span></div></div>
+
+            <div class="form-item full"><label>补充说明 <span class="text-muted">（选填）</span></label>
+                <textarea v-model="currentPlan.supplementNote" rows="2" placeholder="请填写补充说明..." @input="refreshPreview"></textarea>
+            </div>
 
             <div class="form-item full"><label>其他人员</label><div class="other-persons-grid"><template v-if="otherPersonsFromWorkers.length"><span v-for="name in otherPersonsFromWorkers" :key="name" class="other-person-item"><span class="name">{{ name }}</span><input type="text" v-model="currentPlan.otherRemarkV2[name]" placeholder="备注" @input="refreshPreview" /></span></template><span v-else style="color:var(--text-light);font-size:0.78rem;grid-column:1/-1;text-align:center;padding:10px 0;">（所有人员均已担任角色或在作业人员列表中）</span></div></div>
         </div>
@@ -439,7 +501,7 @@
                     }
                 }
             },
-            template: `<div class="dropdown-multi" :class="{ open: open }" @click.stop><div class="selected-display" @click="toggle"><template v-if="value && value.length"><span v-for="item in value" :key="item" class="tag">{{ item }} <button class="del" @click.stop="removeItem(item)">×</button></span></template><span v-else class="placeholder">{{ placeholder || '请选择' }}</span></div><div class="dropdown-panel" :class="{ open: open }"><label v-for="opt in options" :key="getOptionValue(opt)"><input type="checkbox" :value="getOptionValue(opt)" :checked="isChecked(opt)" @change="toggleOption(opt, $event)" /><span class="option-text">{{ getDisplayText(opt) }}</span></label><div v-if="!options || options.length === 0" style="padding:10px 14px;color:var(--text-light);font-size:0.85rem;">暂无选项</div></div></div>`
+            template: `<div class="dropdown-multi" :class="{ open: open }" @click.stop><div class="selected-display" @click="toggle"><template v-if="value && value.length"><span v-for="item in value" :key="item" class="tag">{{ item }} <button class="del" @click.stop="removeItem(item)">×</button></span></template><span v-else class="placeholder">{{ placeholder || '请选择' }}</span></div><div class="dropdown-panel" :class="{ open: open }"><label v-for="opt in options" :key="getOptionValue(opt)"><input type="checkbox" :value="getOptionValue(opt)" :checked="isChecked(opt)" @change="toggleOption(opt, $event)" /><span class="option-text">{{ getDisplayText(opt) }}</span></label><div v-if="!options || options.length === 0" style="padding:10px 14px;color:var(--text-light);font-size:0.82rem;">暂无选项</div></div></div>`
         });
 
         new Vue({
@@ -452,7 +514,7 @@
                 guardSiteBaseOptions: ['冯少均', '于凌云', '唐鹏', '李晓红', '王杰', '毛富强', '刘奔'],
                 workerBaseOptions: ['刘奔', '于凌云', '庄同健', '李晓红', '冯少均', '毛富强', '张继锋', '王杰', '于锋', '唐鹏', '吴静艺', '杨菀莹'],
                 workItemsBaseOptions: ['道岔检查', '站线手工检查', '钢轨磨耗测量', '无缝线路位移观测', '轨道检查仪检查', '线路几何尺寸小车检查', '线路设备巡检', '曲线正矢检查', '道岔降低值测量', '道岔磨耗测量', '学习', '培训', '整理库房'],
-                toolOptions: ['道尺', '支距尺', '检查锤', '弦线', '塞尺', '钢直尺', '1米平直尺', '轨检仪', '电脑包', '无缝线路位移观测仪', '移动照明灯', '多功能测量尺', '钢轨辙叉磨耗仪', '降低值测量尺', '布卷尺', '钢卷尺', '油漆', '排笔', '油漆刷', '字模', '篷布', '防护备品', '尖轨侧磨尺', '头灯', '钢轨磨耗仪'],
+                toolOptions: ['道尺', '支距尺', '检查锤', '弦线', '塞尺', '钢直尺', '1米平直尺', '轨检仪', '电脑包', '无缝线路位移观测仪', '移动照明灯', '多功能测量尺', '钢轨辙叉磨耗仪', '降低值测量尺', '布卷尺', '钢卷尺', '油漆', '排笔', '油漆刷', '字模', '篷布', '防护备品', '尖轨侧磨尺', '头灯', '钢轨磨耗仪', '钢丝刷'],
                 gateData: [
                     { line: '湖口疏解线', gate: 'K1+140', dir: '单行' }, { line: '湖口疏解线', gate: 'K2+340', dir: '单行' },
                     { line: '铜九线', gate: 'K164+200', dir: '单行' }, { line: '铜九线', gate: 'K165+780', dir: '单行' }, { line: '铜九线', gate: 'K166+980', dir: '单行' }, { line: '铜九线', gate: 'K168+400', dir: '单行' }, { line: '铜九线', gate: 'K170+450', dir: '单行' }, { line: '铜九线', gate: 'K174+760', dir: '单行' }, { line: '铜九线', gate: 'K175+710', dir: '单行' }, { line: '铜九线', gate: 'K179+400', dir: '单行' }, { line: '铜九线', gate: 'K180+230', dir: '单行' }, { line: '铜九线', gate: 'K182+560', dir: '单行' }, { line: '铜九线', gate: 'K183+180', dir: '单行' }, { line: '铜九线', gate: 'K185+100', dir: '单行' }, { line: '铜九线', gate: 'K187+530', dir: '单行' }, { line: '铜九线', gate: 'K188+600', dir: '单行' }, { line: '铜九线', gate: 'K190+010', dir: '单行' }, { line: '铜九线', gate: 'K191+900', dir: '单行' }, { line: '铜九线', gate: 'K193+750', dir: '单行' }, { line: '铜九线', gate: 'K197+700', dir: '单行' }, { line: '铜九线', gate: 'K198+900', dir: '单行' }, { line: '铜九线', gate: 'K200+230', dir: '单行' }, { line: '铜九线', gate: 'K201+360', dir: '单行' }, { line: '铜九线', gate: 'K203+450', dir: '单行' }, { line: '铜九线', gate: 'K204+700', dir: '单行' }, { line: '铜九线', gate: 'K207+200', dir: '单行' }, { line: '铜九线', gate: 'K209+800', dir: '单行' }, { line: '铜九线', gate: 'K211+100', dir: '单行' }, { line: '铜九线', gate: 'K212+500', dir: '单行' }, { line: '铜九线', gate: 'K213+760', dir: '单行' }, { line: '铜九线', gate: 'K215+400', dir: '单行' }, { line: '铜九线', gate: 'K216+888', dir: '单行' }, { line: '铜九线', gate: 'K218+620', dir: '单行' }, { line: '铜九线', gate: 'K219+050', dir: '单行' },
@@ -464,7 +526,7 @@
             },
             computed: {
                 currentPlan: function() { return this.plans[this.currentPlanIndex] || null; },
-                isPointIn: function() { var p = this.currentPlan; return p && (p.planType === '点内检查' || p.planType === '点内维修'); },
+                isPointIn: function() { var p = this.currentPlan; return p && (p.planType === '点内检查' || p.planType === '点内维修' || p.planType === '施工维修'); },
                 showRegisterStation: function() { var p = this.currentPlan; return p && ['点外检查', '点外维修', '栅栏网外', '非上道'].indexOf(p.planType) === -1; },
                 directionOptions: function() { var p = this.currentPlan; return p && p.lineName ? (this.lineDirectionMap[p.lineName] || []) : []; },
                 stationOptions: function() { var p = this.currentPlan; return p && p.lineName ? (this.lineStationMap[p.lineName] || []) : []; },
@@ -478,6 +540,7 @@
                 rolePersonsSet: function() { var p = this.currentPlan; if (!p) return new Set(); var set = new Set(); var leader = p.leader === '__custom__' ? (p.leaderCustom || '') : (p.leader || ''); if (leader && leader.trim()) set.add(leader.trim()); (p.guardStationList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') set.add(n.trim()); }); (p.guardSiteList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') set.add(n.trim()); }); (p.guardFarList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') set.add(n.trim()); }); return set; },
                 otherPersonsFromWorkers: function() { var p = this.currentPlan; if (!p) return []; var roleSet = this.rolePersonsSet; var selected = new Set((p.workers || []).filter(function(w) { return w !== '__custom__'; })); return this.fixedWorkerOptions.filter(function(w) { return !roleSet.has(w) && !selected.has(w); }); },
                 workerCount: function() { var p = this.currentPlan; if (!p) return 0; var set = new Set((p.workers || []).filter(function(w) { return w !== '__custom__'; })); var leader = p.leader === '__custom__' ? (p.leaderCustom || '') : (p.leader || ''); if (leader && leader.trim()) set.add(leader.trim()); (p.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') set.add(n); }); (p.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') set.add(n); }); return set.size; },
+                guardCountAuto: function() { var p = this.currentPlan; if (!p) return 0; var count = 0; (p.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') count++; }); (p.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') count++; }); return count; },
                 dupError: function() { var p = this.currentPlan; if (!p) return ''; var all = []; var leader = p.leader === '__custom__' ? (p.leaderCustom || '') : (p.leader || ''); if (leader && leader.trim()) all.push(leader.trim()); (p.guardStationList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') all.push(n.trim()); }); (p.guardSiteList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') all.push(n.trim()); }); (p.guardFarList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') all.push(n.trim()); }); var dup = all.filter(function(v, i) { return all.indexOf(v) !== i; }); return dup.length ? '⚠️ 姓名重复：' + Array.from(new Set(dup)).join('、') : ''; },
                 hasRoleConflict: function() { return !!this.dupError; },
                 previewTitle: function() { var p = this.currentPlan; if (!p || !p.date) return '湖口检查工区计划'; var d = p.date; var parts = d.split('-'); if (parts.length !== 3) return '湖口检查工区' + d + '计划'; return '湖口检查工区' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日计划'; },
@@ -495,76 +558,83 @@
                     opts.push({ label: '✏️ 自定义', value: '__custom__' });
                     return opts;
                 },
-                workItemsOptionsWithCustom: function() { var opts = this.workItemsBaseOptions.map(function(item) { return { label: item, value: item }; }); opts.push({ label: '✏️ 自定义', value: '__custom__' }); return opts; },
-                showGuardStationCustom: function() { var list = this.currentPlan ? this.currentPlan.guardStationList : []; return list && list.indexOf('__custom__') !== -1; },
-                showGuardSiteCustom: function() { var list = this.currentPlan ? this.currentPlan.guardSiteList : []; return list && list.indexOf('__custom__') !== -1; },
-                showGuardFarCustom: function() { var list = this.currentPlan ? this.currentPlan.guardFarList : []; return list && list.indexOf('__custom__') !== -1; },
-                showWorkerCustom: function() { var list = this.currentPlan ? this.currentPlan.workers : []; return list && list.indexOf('__custom__') !== -1; },
-                showWorkItemCustom: function() { var list = this.currentPlan ? this.currentPlan.workItems : []; return list && list.indexOf('__custom__') !== -1; }
+                workItemsOptionsWithCustom: function() { var opts = this.workItemsBaseOptions.map(function(item) { return { label: item, value: item }; }); opts.push({ label: '✏️ 自定义', value: '__custom__' }); return opts; }
             },
             watch: {
+                // 头灯数量自动同步作业人数
                 workerCount: function(newVal) {
                     var p = this.currentPlan;
                     if (p && p.tools && p.tools['头灯'] !== undefined) {
                         this.$set(p.tools, '头灯', newVal || 1);
                     }
+                },
+                guardCountAuto: function(newVal) {
+                    var p = this.currentPlan;
+                    if (p && p.tools && p.tools['防护备品'] !== undefined) {
+                        this.$set(p.tools, '防护备品', newVal || 1);
+                    }
                 }
             },
             methods: {
-                addGuardStationCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.guardStationCustom || '').trim(); if (!name) { alert('请填写姓名'); return; } var list = p.guardStationList || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.guardStationList = list; p.guardStationCustom = ''; this.saveToLocal(); this.refreshPreview(); },
-                removeGuardStationItem: function(name) { var p = this.currentPlan; if (!p) return; var list = p.guardStationList || []; var idx = list.indexOf(name); if (idx !== -1) list.splice(idx, 1); p.guardStationList = list; this.saveToLocal(); this.refreshPreview(); },
-                addGuardSiteCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.guardSiteCustom || '').trim(); if (!name) { alert('请填写姓名'); return; } var list = p.guardSiteList || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.guardSiteList = list; p.guardSiteCustom = ''; this.saveToLocal(); this.refreshPreview(); },
-                removeGuardSiteItem: function(name) { var p = this.currentPlan; if (!p) return; var list = p.guardSiteList || []; var idx = list.indexOf(name); if (idx !== -1) list.splice(idx, 1); p.guardSiteList = list; this.saveToLocal(); this.refreshPreview(); },
-                addGuardFarCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.guardFarCustom || '').trim(); if (!name) { alert('请填写姓名'); return; } var list = p.guardFarList || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.guardFarList = list; p.guardFarCustom = ''; this.saveToLocal(); this.refreshPreview(); },
-                removeGuardFarItem: function(name) { var p = this.currentPlan; if (!p) return; var list = p.guardFarList || []; var idx = list.indexOf(name); if (idx !== -1) list.splice(idx, 1); p.guardFarList = list; this.saveToLocal(); this.refreshPreview(); },
-                addWorkerCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.workerCustom || '').trim(); if (!name) { alert('请填写姓名'); return; } var list = p.workers || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.workers = list; p.workerCustom = ''; this.saveToLocal(); this.refreshPreview(); },
-                removeWorkerItem: function(name) { var p = this.currentPlan; if (!p) return; var list = p.workers || []; var idx = list.indexOf(name); if (idx !== -1) list.splice(idx, 1); p.workers = list; this.saveToLocal(); this.refreshPreview(); },
-                addWorkItemCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.workItemCustom || '').trim(); if (!name) { alert('请填写项目名称'); return; } var list = p.workItems || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.workItems = list; p.workItemCustom = ''; this.saveToLocal(); this.refreshPreview(); },
-                removeWorkItem: function(name) { var p = this.currentPlan; if (!p) return; var list = p.workItems || []; var idx = list.indexOf(name); if (idx !== -1) list.splice(idx, 1); p.workItems = list; this.saveToLocal(); this.refreshPreview(); },
-                handleToolSelect: function(opt) { var p = this.currentPlan; if (!p || !opt) return; if (this.toolOptions.indexOf(opt) === -1) return; if (!p.tools[opt]) { this.$set(p.tools, opt, opt === '头灯' ? (this.workerCount || 1) : 1); } else { p.tools[opt] = (p.tools[opt] || 0) + 1; } if (p.toolSelectedList.indexOf(opt) === -1) { p.toolSelectedList.push(opt); } this.saveToLocal(); this.refreshPreview(); },
+                clearAllWorkers: function() { var p = this.currentPlan; if (!p) return; p.workers = []; this.saveToLocal(); this.refreshPreview(); },
+                clearAllWorkItems: function() { var p = this.currentPlan; if (!p) return; p.workItems = []; this.saveToLocal(); this.refreshPreview(); },
+                handleToolSelect: function(opt) {
+                    var p = this.currentPlan;
+                    if (!p || !opt) return;
+                    if (this.toolOptions.indexOf(opt) === -1) return;
+                    if (!p.tools[opt]) {
+                        var initVal = 1;
+                        if (opt === '头灯') initVal = this.workerCount || 1;
+                        else if (opt === '防护备品') initVal = this.guardCountAuto || 1;
+                        this.$set(p.tools, opt, initVal);
+                    } else {
+                        p.tools[opt] = (p.tools[opt] || 0) + 1;
+                    }
+                    if (p.toolSelectedList.indexOf(opt) === -1) p.toolSelectedList.push(opt);
+                    this.saveToLocal();
+                    this.refreshPreview();
+                },
                 removeToolByName: function(name) { var p = this.currentPlan; if (!p || !name) return; if (this.toolOptions.indexOf(name) === -1) return; if (p.tools[name] !== undefined) { this.$delete(p.tools, name); var idx = p.toolSelectedList.indexOf(name); if (idx > -1) p.toolSelectedList.splice(idx, 1); this.saveToLocal(); this.refreshPreview(); } },
                 clearAllTools: function() { var p = this.currentPlan; if (!p) return; if (Object.keys(p.tools).length === 0 && Object.keys(p.toolsOther).length === 0) return; if (!confirm('确认清除所有已选机具及数量？')) return; p.tools = {}; p.toolsOther = {}; p.toolSelectedList = []; this.saveToLocal(); this.refreshPreview(); },
                 saveCurrentPlan: function() { this.saveToLocal(); this.copyMsg = '✅ 当前计划已保存'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 2000); },
-                saveToLocal: function() { try { localStorage.setItem('hukou_plans', JSON.stringify(this.plans)); localStorage.setItem('hukou_plan_index', String(this.currentPlanIndex)); this.saveStatus = '✅ 已自动保存 ' + new Date().toLocaleTimeString(); var self = this; setTimeout(function() { self.saveStatus = ''; }, 2000); } catch(e) { console.warn('保存失败:', e); } },
-                loadFromLocal: function() { try { var data = localStorage.getItem('hukou_plans'); var idx = localStorage.getItem('hukou_plan_index'); if (data) { var parsed = JSON.parse(data); if (Array.isArray(parsed) && parsed.length > 0) { this.plans = parsed; if (idx !== null && parseInt(idx) < this.plans.length) { this.currentPlanIndex = parseInt(idx); } else { this.currentPlanIndex = 0; } return true; } } } catch(e) { console.warn('加载失败:', e); } return false; },
+                saveToLocal: function() { try { localStorage.setItem('hukou_plans', JSON.stringify(this.plans)); localStorage.setItem('hukou_plan_index', String(this.currentPlanIndex)); this.saveStatus = '✅ 已自动保存 ' + new Date().toLocaleTimeString(); var self = this; setTimeout(function() { self.saveStatus = ''; }, 2000); } catch(e) {} },
+                loadFromLocal: function() { try { var data = localStorage.getItem('hukou_plans'); var idx = localStorage.getItem('hukou_plan_index'); if (data) { var parsed = JSON.parse(data); if (Array.isArray(parsed) && parsed.length > 0) { this.plans = parsed; if (idx !== null && parseInt(idx) < this.plans.length) { this.currentPlanIndex = parseInt(idx); } else { this.currentPlanIndex = 0; } return true; } } } catch(e) {} return false; },
                 getTomorrow: function() { var d = new Date(); d.setDate(d.getDate() + 1); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); },
-                createDefaultPlan: function() { return { date: this.getTomorrow(), planType: '点内检查', windowType: '', timeStart: '', timeEnd: '', lineName: '', direction: [], startStation: '', endStation: '', startContains: false, endContains: false, mileageStart: '', mileageEnd: '', trackNo: '', switchNo: '', registerStation: '', stationGuardStation: [], gateIn: '', gateOut: '', gateBackupSelect: '', gateBackupCustom: '', leader: '', leaderCustom: '', guardStationList: [], guardStationCustom: '', guardSiteList: [], guardSiteCustom: '', guardFarList: [], guardFarCustom: '', workers: [], workerCustom: '', workItems: [], workItemCustom: '', tools: {}, toolsOther: {}, toolSelectedList: [], toolOtherName: '', crossLinePosition: '', phone: '', phoneCustom: '', camera: {}, cameraOtherName: '', cameraOtherVal: '', otherRemarkV2: {} }; },
+                createDefaultPlan: function() { return { date: this.getTomorrow(), planType: '点内检查', windowType: '', timeStart: '', timeEnd: '', lineName: '', direction: [], startStation: '', endStation: '', startContains: false, endContains: false, mileageStart: '', mileageEnd: '', trackNo: '', switchNo: '', registerStation: '', stationGuardStation: [], gateIn: '', gateOut: '', gateBackupList: [], leader: '', leaderCustom: '', guardStationList: [], guardSiteList: [], guardFarList: [], workers: [], workItems: [], tools: {}, toolsOther: {}, toolSelectedList: [], toolOtherName: '', crossLinePosition: '', phone: '', phoneCustom: '', camera: {}, cameraOtherName: '', cameraOtherVal: '', otherRemarkV2: {}, otherCount: 0, supplementNote: '' }; },
                 addPlan: function() { this.plans.push(this.createDefaultPlan()); this.currentPlanIndex = this.plans.length - 1; this.saveToLocal(); this.refreshPreview(); },
-                copyCurrentPlan: function() { var p = this.currentPlan; if (!p) { alert('请先选择要复制的计划'); return; } var copy = deepClone(p); copy.date = this.getTomorrow(); copy.timeStart = ''; copy.timeEnd = ''; copy.tools = {}; copy.toolsOther = {}; copy.toolSelectedList = []; copy.guardStationList = []; copy.guardStationCustom = ''; copy.guardSiteList = []; copy.guardSiteCustom = ''; copy.guardFarList = []; copy.guardFarCustom = ''; copy.workers = []; copy.workerCustom = ''; copy.workItems = []; copy.workItemCustom = ''; this.plans.push(copy); this.currentPlanIndex = this.plans.length - 1; this.saveToLocal(); this.refreshPreview(); this.copyMsg = '✅ 已复制当前计划'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 2000); },
+                copyCurrentPlan: function() { var p = this.currentPlan; if (!p) { alert('请先选择要复制的计划'); return; } var copy = deepClone(p); copy.date = this.getTomorrow(); copy.timeStart = ''; copy.timeEnd = ''; copy.tools = {}; copy.toolsOther = {}; copy.toolSelectedList = []; copy.guardStationList = []; copy.guardSiteList = []; copy.guardFarList = []; copy.workers = []; copy.workItems = []; this.plans.push(copy); this.currentPlanIndex = this.plans.length - 1; this.saveToLocal(); this.refreshPreview(); this.copyMsg = '✅ 已复制当前计划'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 2000); },
                 deleteCurrentPlan: function() { if (this.plans.length <= 1) { alert('至少保留一条计划'); return; } var idx = this.currentPlanIndex; if (!confirm('确认删除「计划 ' + (idx + 1) + '」吗？')) return; this.plans.splice(idx, 1); if (idx >= this.plans.length) { this.currentPlanIndex = this.plans.length - 1; } else { this.currentPlanIndex = idx; } this.saveToLocal(); this.refreshPreview(); this.copyMsg = '🗑️ 已删除计划 ' + (idx + 1); var self = this; setTimeout(function() { self.copyMsg = ''; }, 2000); },
                 switchPlan: function(idx) { this.currentPlanIndex = idx; this.refreshPreview(); },
                 refreshPreview: function() { this.exportRichTextForAllPlans(); this.$forceUpdate(); },
-                exportRichTextForAllPlans: function() { var self = this; if (!this.plans || this.plans.length === 0) { this.richTextContent = '请先添加计划'; return; } var overallHtml = '<div style="font-family: -apple-system, PingFang SC, Microsoft YaHei, sans-serif; font-size: 0.88rem; line-height: 2.2; color: #2a4a4a;">'; var title = this.previewTitle; overallHtml += '<div class="title-line">' + title + '</div>'; this.plans.forEach(function(plan, index) { if (index > 0) { overallHtml += '<hr class="divider" />'; } overallHtml += self.generateSinglePlanHtml(plan, index); }); overallHtml += '</div>'; this.richTextContent = overallHtml; },
-                generateSinglePlanHtml: function(plan, index) { var self = this; var items = []; var add = function(label, value) { if (value && value.toString().trim()) items.push({ label: label, value: value }); }; add('作业日期', plan.date); add('作业类型', plan.planType || ''); if ((plan.planType === '点内检查' || plan.planType === '点内维修') && plan.windowType) { add('天窗类型', plan.windowType); } var startTime = (plan.timeStart || '').trim(); var endTime = (plan.timeEnd || '').trim(); var timeStr = ''; if (startTime && endTime) { var needNextDay = false; var sp = startTime.split(':'); var ep = endTime.split(':'); if (sp.length === 2 && ep.length === 2) { var sm = parseInt(sp[0]) * 60 + parseInt(sp[1]); var em = parseInt(ep[0]) * 60 + parseInt(ep[1]); if (!isNaN(sm) && !isNaN(em) && em < sm) needNextDay = true; } timeStr = startTime + ' — ' + (needNextDay ? '次日' : '') + endTime; } else if (startTime) timeStr = startTime; else if (endTime) timeStr = endTime; if (timeStr) add('作业时间', timeStr); add('线名', plan.lineName); if (plan.direction && plan.direction.length) add('行别', plan.direction.join('、')); var secDisp = ''; var s = plan.startStation || '', e = plan.endStation || ''; var sc = plan.startContains, ec = plan.endContains; if (s || e) { var sd = s + (sc ? '（含）' : ''); var ed = e + (ec ? '（含）' : ''); if (s && !e) secDisp = sd; else if (!s && e) secDisp = ed; else if (s === e) secDisp = sd; else secDisp = sd + '至' + ed; } if (secDisp) add('区段', secDisp); var mileStart = (plan.mileageStart || '').trim(); var mileEnd = (plan.mileageEnd || '').trim(); var fmtMile = function(v) { var parts = v.split('.'); return parts.length === 2 ? 'K' + parts[0] + '+' + parts[1] : v; }; var mileDisp = ''; if (mileStart && mileEnd) mileDisp = fmtMile(mileStart) + '至' + fmtMile(mileEnd); else if (mileStart) mileDisp = fmtMile(mileStart); else if (mileEnd) mileDisp = fmtMile(mileEnd); if (mileDisp) add('作业里程', mileDisp); var locParts = []; if (plan.switchNo) locParts.push('道岔编号:' + plan.switchNo); if (plan.trackNo) locParts.push('股道编号:' + plan.trackNo); if (locParts.length) add('作业地点', locParts.join(' ')); var showReg = ['点外检查', '点外维修', '栅栏网外', '非上道'].indexOf(plan.planType) === -1; if (showReg && plan.registerStation) add('天窗登记站', plan.registerStation); if (plan.stationGuardStation && plan.stationGuardStation.length) add('驻站所在站', plan.stationGuardStation.join('、')); var gateParts = []; if (plan.gateIn) gateParts.push('进网' + plan.gateIn); if (plan.gateOut) gateParts.push('出网' + plan.gateOut); if (gateParts.length) add('通道门', gateParts.join(' ')); var backup = plan.gateBackupSelect === '__custom__' ? (plan.gateBackupCustom || '') : (plan.gateBackupSelect || ''); add('备用通道门', backup); var workerSet = new Set((plan.workers || []).filter(Boolean)); var leaderFinal = plan.leader === '__custom__' ? (plan.leaderCustom || '') : (plan.leader || ''); if (leaderFinal && leaderFinal.trim()) workerSet.add(leaderFinal.trim()); (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); }); (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); }); add('作业人数', workerSet.size); add('作业负责人', leaderFinal);
-                    if (plan.guardStationList && plan.guardStationList.length) {
-                        var uniqStation = Array.from(new Set(plan.guardStationList)).filter(function(n) { return n && n !== '__custom__'; });
-                        if (uniqStation.length) add('驻站防护员', uniqStation.join('、'));
+                exportRichTextForAllPlans: function() { var self = this; if (!this.plans || this.plans.length === 0) { this.richTextContent = '请先添加计划'; return; } var overallHtml = '<div style="font-family: -apple-system, PingFang SC, Microsoft YaHei, sans-serif; font-size: 0.85rem; line-height: 2.2; color: #2a4a4a;">'; var title = this.previewTitle; overallHtml += '<div class="title-line">' + title + '</div>'; this.plans.forEach(function(plan, index) { if (index > 0) { overallHtml += '<hr class="divider" />'; } overallHtml += self.generateSinglePlanHtml(plan, index); }); overallHtml += '</div>'; this.richTextContent = overallHtml; },
+                generateSinglePlanHtml: function(plan, index) { var self = this; var items = []; var add = function(label, value) { if (value && value.toString().trim()) items.push({ label: label, value: value }); }; add('作业日期', plan.date); add('作业类型', plan.planType || ''); if ((plan.planType === '点内检查' || plan.planType === '点内维修' || plan.planType === '施工维修') && plan.windowType) { add('天窗类型', plan.windowType); } var startTime = (plan.timeStart || '').trim(); var endTime = (plan.timeEnd || '').trim(); var timeStr = ''; if (startTime && endTime) { var needNextDay = false; var sp = startTime.split(':'); var ep = endTime.split(':'); if (sp.length === 2 && ep.length === 2) { var sm = parseInt(sp[0]) * 60 + parseInt(sp[1]); var em = parseInt(ep[0]) * 60 + parseInt(ep[1]); if (!isNaN(sm) && !isNaN(em) && em < sm) needNextDay = true; } timeStr = startTime + ' — ' + (needNextDay ? '次日' : '') + endTime; } else if (startTime) timeStr = startTime; else if (endTime) timeStr = endTime; if (timeStr) add('作业时间', timeStr); add('线名', plan.lineName); if (plan.direction && plan.direction.length) add('行别', plan.direction.join('、')); var secDisp = ''; var s = plan.startStation || '', e = plan.endStation || ''; var sc = plan.startContains, ec = plan.endContains; if (s || e) { var sd = s + (sc ? '（含）' : ''); var ed = e + (ec ? '（含）' : ''); if (s && !e) secDisp = sd; else if (!s && e) secDisp = ed; else if (s === e) secDisp = sd; else secDisp = sd + '至' + ed; } if (secDisp) add('区段', secDisp); var mileStart = (plan.mileageStart || '').trim(); var mileEnd = (plan.mileageEnd || '').trim(); var fmtMile = function(v) { var parts = v.split('.'); return parts.length === 2 ? 'K' + parts[0] + '+' + parts[1] : v; }; var mileDisp = ''; if (mileStart && mileEnd) mileDisp = fmtMile(mileStart) + '至' + fmtMile(mileEnd); else if (mileStart) mileDisp = fmtMile(mileStart); else if (mileEnd) mileDisp = fmtMile(mileEnd); if (mileDisp) add('作业里程', mileDisp); var locParts = []; if (plan.switchNo) locParts.push('道岔编号:' + plan.switchNo); if (plan.trackNo) locParts.push('股道编号:' + plan.trackNo); if (locParts.length) add('作业地点', locParts.join(' ')); var showReg = ['点外检查', '点外维修', '栅栏网外', '非上道'].indexOf(plan.planType) === -1; if (showReg && plan.registerStation) add('天窗登记站', plan.registerStation); if (plan.stationGuardStation && plan.stationGuardStation.length) add('驻站所在站', plan.stationGuardStation.join('、')); var gateParts = []; if (plan.gateIn) gateParts.push('进网' + plan.gateIn); if (plan.gateOut) gateParts.push('出网' + plan.gateOut); if (gateParts.length) add('通道门', gateParts.join(' ')); if (plan.gateBackupList && plan.gateBackupList.length) add('备用通道门', plan.gateBackupList.join('、')); var workerSet = new Set((plan.workers || []).filter(Boolean)); var leaderFinal = plan.leader === '__custom__' ? (plan.leaderCustom || '') : (plan.leader || ''); if (leaderFinal && leaderFinal.trim()) workerSet.add(leaderFinal.trim()); (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); }); (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); });
+                    // 作业人数和其他人数分两行
+                    add('作业人数', workerSet.size);
+                    if (plan.otherCount && plan.otherCount > 0) {
+                        add('其他人数', plan.otherCount);
                     }
-                    if (plan.guardSiteList && plan.guardSiteList.length) {
-                        var uniqSite = Array.from(new Set(plan.guardSiteList)).filter(function(n) { return n && n !== '__custom__'; });
-                        if (uniqSite.length) add('工地防护员', uniqSite.join('、'));
-                    }
-                    if (plan.guardFarList && plan.guardFarList.length) {
-                        var uniqFar = Array.from(new Set(plan.guardFarList)).filter(function(n) { return n && n !== '__custom__'; });
-                        if (uniqFar.length) add('远方防护', uniqFar.join('、'));
-                    }
+                    add('作业负责人', leaderFinal);
+                    if (plan.guardStationList && plan.guardStationList.length) { var uniqStation = Array.from(new Set(plan.guardStationList)).filter(function(n) { return n && n !== '__custom__'; }); if (uniqStation.length) add('驻站防护员', uniqStation.join('、')); }
+                    if (plan.guardSiteList && plan.guardSiteList.length) { var uniqSite = Array.from(new Set(plan.guardSiteList)).filter(function(n) { return n && n !== '__custom__'; }); if (uniqSite.length) add('工地防护员', uniqSite.join('、')); }
+                    if (plan.guardFarList && plan.guardFarList.length) { var uniqFar = Array.from(new Set(plan.guardFarList)).filter(function(n) { return n && n !== '__custom__'; }); if (uniqFar.length) add('远方防护', uniqFar.join('、')); }
                     var workItems = (plan.workItems || []).filter(function(w) { return w && w !== '__custom__'; }); if (workItems.length) add('作业项目', workItems.join('、'));
                     var allTools = {}; for (var k in plan.tools) allTools[k] = plan.tools[k]; for (var k2 in plan.toolsOther) allTools[k2] = plan.toolsOther[k2];
                     var toolStr = Object.keys(allTools).filter(function(k) { return allTools[k] && allTools[k].toString().trim(); }).map(function(k) { return k + allTools[k]; }).join('、');
                     add('作业机具', toolStr);
-                    if (plan.crossLinePosition && plan.crossLinePosition.trim()) { add('跨线位置', plan.crossLinePosition.trim()); } var phoneFinal = plan.phone === '__custom__' ? (plan.phoneCustom || '') : (plan.phone || ''); add('定位手机', phoneFinal); var camArr = Object.keys(plan.camera || {}).filter(function(k) { return plan.camera[k] && plan.camera[k].trim(); }).map(function(k) { return k + plan.camera[k]; }); if (plan.cameraOtherName && plan.cameraOtherVal) camArr.push(plan.cameraOtherName + plan.cameraOtherVal); add('执法仪编号', camArr.length ? camArr.join('；') : ''); var allWorkers = new Set(); (plan.workers || []).forEach(function(w) { if (w && w !== '__custom__') allWorkers.add(w); }); if (leaderFinal) allWorkers.add(leaderFinal); (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); }); (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); }); if (allWorkers.size) add('作业人员', Array.from(allWorkers).join('、')); var roleSet = new Set(); if (leaderFinal && leaderFinal.trim()) roleSet.add(leaderFinal.trim()); (plan.guardStationList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); }); (plan.guardSiteList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); }); (plan.guardFarList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); }); var selectedWorkers = new Set((plan.workers || []).filter(function(w) { return w && w !== '__custom__'; })); var otherList = this.fixedWorkerOptions.filter(function(w) { return !roleSet.has(w) && !selectedWorkers.has(w); }); var otherItems = []; otherList.forEach(function(name) { var remark = (plan.otherRemarkV2 && plan.otherRemarkV2[name]) || ''; otherItems.push(remark.trim() ? name + '(' + remark.trim() + ')' : name); }); if (otherItems.length) add('其他人员', otherItems.join('、')); var html = ''; items.forEach(function(item) { html += '<div><span class="label">' + item.label + '</span>：<span class="value">' + item.value + '</span></div>'; }); return html; },
+                    if (plan.crossLinePosition && plan.crossLinePosition.trim()) { add('跨线位置', plan.crossLinePosition.trim()); } var phoneFinal = plan.phone === '__custom__' ? (plan.phoneCustom || '') : (plan.phone || ''); add('定位手机', phoneFinal); var camArr = Object.keys(plan.camera || {}).filter(function(k) { return plan.camera[k] && plan.camera[k].trim(); }).map(function(k) { return k + plan.camera[k]; }); if (plan.cameraOtherName && plan.cameraOtherVal) camArr.push(plan.cameraOtherName + plan.cameraOtherVal); add('执法仪编号', camArr.length ? camArr.join('；') : ''); var allWorkers = new Set(); (plan.workers || []).forEach(function(w) { if (w && w !== '__custom__') allWorkers.add(w); }); if (leaderFinal) allWorkers.add(leaderFinal); (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); }); (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); }); if (allWorkers.size) add('作业人员', Array.from(allWorkers).join('、')); var roleSet = new Set(); if (leaderFinal && leaderFinal.trim()) roleSet.add(leaderFinal.trim()); (plan.guardStationList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); }); (plan.guardSiteList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); }); (plan.guardFarList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); }); var selectedWorkers = new Set((plan.workers || []).filter(function(w) { return w && w !== '__custom__'; })); var otherList = this.fixedWorkerOptions.filter(function(w) { return !roleSet.has(w) && !selectedWorkers.has(w); }); var otherItems = []; otherList.forEach(function(name) { var remark = (plan.otherRemarkV2 && plan.otherRemarkV2[name]) || ''; otherItems.push(remark.trim() ? name + '(' + remark.trim() + ')' : name); }); if (otherItems.length) add('其他人员', otherItems.join('、'));
+                    if (plan.supplementNote && plan.supplementNote.trim()) add('补充说明', plan.supplementNote.trim());
+                    var html = ''; items.forEach(function(item) { html += '<div><span class="label">' + item.label + '</span>：<span class="value">' + item.value + '</span></div>'; }); return html; },
                 copyRichText: function() { var html = this.richTextContent; if (!html || html.indexOf('湖口检查工区') === -1) { alert('请先点击「生成计划」生成内容'); return; } var self = this; if (navigator.clipboard && navigator.clipboard.write) { var blob = new Blob([html], { type: 'text/html' }); navigator.clipboard.write([new ClipboardItem({ 'text/html': blob })]).then(function() { self.copyMsg = '✅ 富文本已复制'; setTimeout(function() { self.copyMsg = ''; }, 3000); }).catch(function() { self.fallbackCopyRichText(html); }); } else { this.fallbackCopyRichText(html); } },
                 fallbackCopyRichText: function(html) { var div = document.createElement('div'); div.innerHTML = html; var text = div.textContent || div.innerText || ''; var lines = text.split('\n').filter(function(line) { return line.trim(); }); var formattedText = lines.join('\n'); if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(formattedText).then(function() { this.copyMsg = '✅ 已复制纯文本'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 3000); }.bind(this)).catch(function() { this.fallbackCopy(formattedText); }.bind(this)); } else { this.fallbackCopy(formattedText); } },
                 generatePlan: function() { var p = this.currentPlan; if (!p) { alert('请先添加计划'); return; } this.copyMsg = '✅ 计划已生成'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 3000); this.saveToLocal(); this.refreshPreview(); },
                 fallbackCopy: function(text) { var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); this.copyMsg = '✅ 已复制'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 3000); } catch (e) { alert('复制失败，请手动选中预览区文字复制。'); } document.body.removeChild(ta); },
                 resetForm: function() { if (!confirm('重置将清空所有数据，确认吗？')) return; this.plans = [this.createDefaultPlan()]; this.currentPlanIndex = 0; this.copyMsg = ''; this.richTextContent = ''; localStorage.removeItem('hukou_plans'); localStorage.removeItem('hukou_plan_index'); this.refreshPreview(); },
                 onPlanTypeChange: function() { var p = this.currentPlan; if (!p) return; if (!this.isPointIn) p.windowType = ''; if (!this.showRegisterStation) p.registerStation = ''; this.saveToLocal(); this.refreshPreview(); },
-                onLineChange: function() { var p = this.currentPlan; if (!p) return; p.direction = []; p.startStation = ''; p.endStation = ''; p.startContains = false; p.endContains = false; p.stationGuardStation = []; p.registerStation = ''; p.gateIn = ''; p.gateOut = ''; p.gateBackupSelect = ''; if (p.lineName === '湖口疏解线') p.stationGuardStation = ['湖口站']; this.saveToLocal(); this.refreshPreview(); },
+                onLineChange: function() { var p = this.currentPlan; if (!p) return; p.direction = []; p.startStation = ''; p.endStation = ''; p.startContains = false; p.endContains = false; p.stationGuardStation = []; p.registerStation = ''; p.gateIn = ''; p.gateOut = ''; p.gateBackupList = []; if (p.lineName === '湖口疏解线') p.stationGuardStation = ['湖口站']; this.saveToLocal(); this.refreshPreview(); },
                 onRoleChange: function() { this.saveToLocal(); this.refreshPreview(); },
                 addToolOther: function() { var p = this.currentPlan; if (!p) return; var name = p.toolOtherName.trim(); if (!name) { alert('请填写机具名称'); return; } if (!p.toolsOther[name]) this.$set(p.toolsOther, name, 1); p.toolOtherName = ''; this.saveToLocal(); this.refreshPreview(); },
                 removeToolOther: function(name) { var p = this.currentPlan; if (!p) return; this.$delete(p.toolsOther, name); this.saveToLocal(); this.refreshPreview(); },
                 removeTool: function(name) { var p = this.currentPlan; if (!p) return; this.$delete(p.tools, name); var idx = p.toolSelectedList.indexOf(name); if (idx > -1) p.toolSelectedList.splice(idx, 1); this.saveToLocal(); this.refreshPreview(); },
-
                 pushCurrentPlanToDingTalk: function() {
                     var plan = this.currentPlan;
                     if (!plan) { alert('请先填写计划信息'); return; }
@@ -577,7 +647,6 @@
                     var markdown = '**' + title + '（计划 ' + (this.currentPlanIndex + 1) + '）**\n\n' + body;
                     this.sendDingTalkMarkdown(markdown, '✅ 当前计划已推送');
                 },
-
                 pushAllPlansToDingTalk: function() {
                     if (!this.plans || this.plans.length === 0) { alert('请先添加计划'); return; }
                     this.refreshPreview();
@@ -595,51 +664,26 @@
                     var markdown = '**' + title + '（共 ' + this.plans.length + ' 条计划）**\n\n' + allParts.join('\n\n───────────────────\n\n');
                     this.sendDingTalkMarkdown(markdown, '✅ 全部计划已推送');
                 },
-
                 sendDingTalkMarkdown: function(markdown, successMsg) {
                     var self = this;
                     this.copyMsg = '📤 正在推送...';
                     fetch('/.netlify/functions/send-daily-check', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            msgtype: 'markdown',
-                            markdown: {
-                                title: this.previewTitle || '湖口检查工区计划',
-                                text: markdown
-                            }
-                        })
+                        body: JSON.stringify({ msgtype: 'markdown', markdown: { title: this.previewTitle || '湖口检查工区计划', text: markdown } })
                     })
                     .then(function(response) { return response.json(); })
                     .then(function(result) {
-                        if (result.errcode === 0) {
-                            self.copyMsg = successMsg || '✅ 已推送钉钉群';
-                            setTimeout(function() { self.copyMsg = ''; }, 3000);
-                        } else {
-                            self.copyMsg = '❌ 推送失败：' + (result.errmsg || '未知错误');
-                            setTimeout(function() { self.copyMsg = ''; }, 4000);
-                        }
+                        if (result.errcode === 0) { self.copyMsg = successMsg || '✅ 已推送钉钉群'; setTimeout(function() { self.copyMsg = ''; }, 3000); }
+                        else { self.copyMsg = '❌ 推送失败：' + (result.errmsg || '未知错误'); setTimeout(function() { self.copyMsg = ''; }, 4000); }
                     })
                     .catch(function(err) {
                         console.error('推送异常：', err);
                         try {
                             if (navigator.clipboard && navigator.clipboard.writeText) {
-                                navigator.clipboard.writeText(markdown).then(function() {
-                                    self.copyMsg = '📋 推送失败，内容已复制到剪贴板';
-                                    setTimeout(function() { self.copyMsg = ''; }, 4000);
-                                }).catch(function() {
-                                    self.copyMsg = '❌ 推送失败，请检查网络';
-                                    setTimeout(function() { self.copyMsg = ''; }, 4000);
-                                });
-                            } else {
-                                self.fallbackCopy(markdown);
-                                self.copyMsg = '📋 推送失败，内容已复制到剪贴板';
-                                setTimeout(function() { self.copyMsg = ''; }, 4000);
-                            }
-                        } catch (e) {
-                            self.copyMsg = '❌ 推送失败，请检查网络';
-                            setTimeout(function() { self.copyMsg = ''; }, 4000);
-                        }
+                                navigator.clipboard.writeText(markdown).then(function() { self.copyMsg = '📋 推送失败，内容已复制到剪贴板'; setTimeout(function() { self.copyMsg = ''; }, 4000); }).catch(function() { self.copyMsg = '❌ 推送失败，请检查网络'; setTimeout(function() { self.copyMsg = ''; }, 4000); });
+                            } else { self.fallbackCopy(markdown); self.copyMsg = '📋 推送失败，内容已复制到剪贴板'; setTimeout(function() { self.copyMsg = ''; }, 4000); }
+                        } catch (e) { self.copyMsg = '❌ 推送失败，请检查网络'; setTimeout(function() { self.copyMsg = ''; }, 4000); }
                     });
                 }
             },
