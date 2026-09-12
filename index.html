@@ -22,7 +22,6 @@
         body { background: var(--primary-bg); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif; padding: 16px 12px 28px; color: var(--text); font-size: 1rem; -webkit-font-smoothing: antialiased; }
         .container { max-width: 900px; margin: 0 auto; background: var(--white); border-radius: 18px; box-shadow: 0 4px 24px rgba(58, 168, 168, 0.08); padding: 24px 22px 28px; border: 1px solid var(--border); }
 
-        /* ===== 页头：路徽 + 标题居中（无虚线、无计划数） ===== */
         .header { text-align: center; border-bottom: 3px solid var(--primary); padding-bottom: 14px; margin-bottom: 14px; }
         .header-logo-row {
             display: flex;
@@ -54,10 +53,8 @@
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
         .form-item { display: flex; flex-direction: column; gap: 6px; }
         .form-item.full { grid-column: 1 / -1; }
-        .form-item.three-col { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px 18px; }
 
         .form-item label { font-size: 0.85rem; font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
-        .form-item label .required { color: #b22222; font-weight: 700; }
         .form-item label .text-muted { color: var(--text-light); font-weight: 400; font-size: 0.75rem; }
 
         .form-item input, .form-item select, .form-item textarea {
@@ -146,8 +143,6 @@
         .btn { padding: 12px 18px; border: none; border-radius: 26px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.15s; display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex: 1; min-width: 90px; height: 46px; }
         .btn-primary { background: var(--primary); color: white; box-shadow: 0 2px 8px rgba(58, 168, 168, 0.25); }
         .btn-primary:active { background: var(--primary-dark); transform: scale(0.97); }
-        .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--primary-dark); }
-        .btn-outline:active { background: var(--primary-light); }
         .btn-danger { background: #c0392b; color: white; }
         .btn-danger:active { background: #a93226; }
         .btn-sm { padding: 6px 14px; font-size: 0.72rem; background: var(--primary-light); border: none; border-radius: 20px; cursor: pointer; white-space: nowrap; height: 32px; display: inline-flex; align-items: center; color: var(--primary-dark); font-weight: 600; }
@@ -178,13 +173,12 @@
         .inline-flex input[type="radio"] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
         .inline-flex input[type="text"] { padding: 4px 8px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.8rem; width: 72px; height: 36px; background: #ffffff; }
 
-        .dup-error-banner { background: #fee; border: 1px solid #f5c6cb; color: #721c24; padding: 8px 12px; border-radius: 8px; font-size: 0.78rem; margin-top: 4px; }
         .station-display { margin-top: 4px; font-size: 0.78rem; color: var(--primary-dark); font-weight: 600; }
 
-        .time-row, .mileage-row, .gate-row, .station-select-row, .tool-select-row, .add-row {
+        .time-row, .mileage-row, .station-select-row, .tool-select-row, .add-row {
             display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
         }
-        .time-row input, .mileage-row input, .gate-row input, .station-select-row select {
+        .time-row input, .mileage-row input, .station-select-row select {
             flex: 1; min-width: 70px; height: 40px; padding: 6px 10px; font-size: 0.82rem;
             border: 1.5px solid var(--border); border-radius: 8px; background: #ffffff;
         }
@@ -203,7 +197,6 @@
             font-size: 0.72rem; display: inline-flex; align-items: center; gap: 4px;
             color: white; font-weight: 500;
         }
-        .tool-list .chip .chip-name { margin-right: 2px; }
         .tool-list .chip .qty-input {
             width: 34px; padding: 2px 4px; border: none; border-left: 1.5px solid rgba(255,255,255,0.4);
             background: transparent; color: white; font-size: 0.72rem; text-align: center; height: 24px;
@@ -236,10 +229,8 @@
 
         .other-persons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; background: var(--primary-bg); padding: 8px 12px; border-radius: 10px; border: 1.5px solid var(--border); min-height: 44px; }
 
-        .conflict-icon { color: #c0392b; font-weight: 700; margin-left: 4px; font-size: 0.9rem; }
         .clear-row { display: flex; justify-content: flex-end; margin-top: 6px; }
 
-        /* 作业人数 + 其他人数 + 负责人 */
         .row-counts {
             display: grid;
             grid-template-columns: 1fr 1fr 2fr;
@@ -254,7 +245,6 @@
             .header-logo-row { gap: 10px; }
             .rail-icon-img { width: 44px; height: 44px; }
             .form-grid { grid-template-columns: 1fr 1fr; gap: 10px 12px; }
-            .form-item.three-col { grid-template-columns: 1fr 1fr 1fr; gap: 8px 10px; }
             .form-item label { font-size: 0.8rem; }
             .form-item input, .form-item select, .form-item textarea { font-size: 0.78rem; height: 44px; padding: 8px 10px; }
             .form-item textarea { height: 54px; min-height: 44px; }
@@ -274,7 +264,6 @@
             .container { padding: 14px 10px 18px; }
             .header h1 { font-size: 1.3rem; }
             .form-grid { grid-template-columns: 1fr 1fr; gap: 8px 8px; }
-            .form-item.three-col { grid-template-columns: 1fr 1fr 1fr; gap: 6px 8px; }
             .actions { grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
             .actions .btn { height: 42px !important; font-size: 0.75rem !important; }
             .form-item input, .form-item select, .form-item textarea { font-size: 0.75rem; height: 42px; padding: 6px 8px; }
@@ -284,7 +273,6 @@
 </head>
 <body>
     <div class="container" id="app">
-        <!-- ===== 页头：路徽 + 标题（无计划数、无虚线） ===== -->
         <div class="header">
             <div class="header-logo-row">
                 <img src="logo.png" alt="铁路路徽" class="rail-icon-img" />
@@ -349,7 +337,6 @@
                 <dropdown-multi :options="filteredGateOptions" v-model="currentPlan.gateBackupList" placeholder="请选择"></dropdown-multi>
             </div>
 
-            <!-- 作业人数 + 其他人数 + 负责人 同一行 -->
             <div class="form-item full">
                 <div class="row-counts">
                     <div>
@@ -375,7 +362,6 @@
                 </div>
             </div>
 
-            <!-- 驻站 + 工地 一行 -->
             <div class="form-item full" style="display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;">
                 <div>
                     <label>驻站防护 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
@@ -386,7 +372,6 @@
                     <dropdown-multi :options="guardSiteOptionsWithCustom" v-model="currentPlan.guardSiteList" placeholder="请选择"></dropdown-multi>
                 </div>
             </div>
-            <!-- 远方防护 单独一行 -->
             <div class="form-item full">
                 <label>远方防护 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
                 <dropdown-multi :options="guardFarOptionsWithCustom" v-model="currentPlan.guardFarList" placeholder="请选择"></dropdown-multi>
@@ -557,7 +542,6 @@
                 workItemsOptionsWithCustom: function() { var opts = this.workItemsBaseOptions.map(function(item) { return { label: item, value: item }; }); opts.push({ label: '✏️ 自定义', value: '__custom__' }); return opts; }
             },
             watch: {
-                // 头灯数量 = 作业人数 + 其他人数
                 workerCount: function() {
                     var p = this.currentPlan;
                     if (p && p.tools && p.tools['头灯'] !== undefined) {
@@ -611,12 +595,7 @@
                 switchPlan: function(idx) { this.currentPlanIndex = idx; this.refreshPreview(); },
                 refreshPreview: function() { this.exportRichTextForAllPlans(); this.$forceUpdate(); },
                 exportRichTextForAllPlans: function() { var self = this; if (!this.plans || this.plans.length === 0) { this.richTextContent = '请先添加计划'; return; } var overallHtml = '<div style="font-family: -apple-system, PingFang SC, Microsoft YaHei, sans-serif; font-size: 0.85rem; line-height: 2.2; color: #2a4a4a;">'; var title = this.previewTitle; overallHtml += '<div class="title-line">' + title + '</div>'; this.plans.forEach(function(plan, index) { if (index > 0) { overallHtml += '<hr class="divider" />'; } overallHtml += self.generateSinglePlanHtml(plan, index); }); overallHtml += '</div>'; this.richTextContent = overallHtml; },
-                generateSinglePlanHtml: function(plan, index) { var self = this; var items = []; var add = function(label, value) { if (value && value.toString().trim()) items.push({ label: label, value: value }); }; add('作业日期', plan.date); add('作业类型', plan.planType || ''); if ((plan.planType === '点内检查' || plan.planType === '点内维修' || plan.planType === '施工维修') && plan.windowType) { add('天窗类型', plan.windowType); } var startTime = (plan.timeStart || '').trim(); var endTime = (plan.timeEnd || '').trim(); var timeStr = ''; if (startTime && endTime) { var needNextDay = false; var sp = startTime.split(':'); var ep = endTime.split(':'); if (sp.length === 2 && ep.length === 2) { var sm = parseInt(sp[0]) * 60 + parseInt(sp[1]); var em = parseInt(ep[0]) * 60 + parseInt(ep[1]); if (!isNaN(sm) && !isNaN(em) && em < sm) needNextDay = true; } timeStr = startTime + ' — ' + (needNextDay ? '次日' : '') + endTime; } else if (startTime) timeStr = startTime; else if (endTime) timeStr = endTime; if (timeStr) add('作业时间', timeStr); add('线名', plan.lineName); if (plan.direction && plan.direction.length) add('行别', plan.direction.join('、')); var secDisp = ''; var s = plan.startStation || '', e = plan.endStation || ''; var sc = plan.startContains, ec = plan.endContains; if (s || e) { var sd = s + (sc ? '（含）' : ''); var ed = e + (ec ? '（含）' : ''); if (s && !e) secDisp = sd; else if (!s && e) secDisp = ed; else if (s === e) secDisp = sd; else secDisp = sd + '至' + ed; } if (secDisp) add('区段', secDisp); var mileStart = (plan.mileageStart || '').trim(); var mileEnd = (plan.mileageEnd || '').trim(); var fmtMile = function(v) { var parts = v.split('.'); return parts.length === 2 ? 'K' + parts[0] + '+' + parts[1] : v; }; var mileDisp = ''; if (mileStart && mileEnd) mileDisp = fmtMile(mileStart) + '至' + fmtMile(mileEnd); else if (mileStart) mileDisp = fmtMile(mileStart); else if (mileEnd) mileDisp = fmtMile(mileEnd); if (mileDisp) add('作业里程', mileDisp); var locParts = []; if (plan.switchNo) locParts.push('道岔编号:' + plan.switchNo); if (plan.trackNo) locParts.push('股道编号:' + plan.trackNo); if (locParts.length) add('作业地点', locParts.join(' ')); var showReg = ['点外检查', '点外维修', '栅栏网外', '非上道'].indexOf(plan.planType) === -1; if (showReg && plan.registerStation) add('天窗登记站', plan.registerStation); if (plan.stationGuardStation && plan.stationGuardStation.length) add('驻站所在站', plan.stationGuardStation.join('、')); var gateParts = []; if (plan.gateIn) gateParts.push('进网' + plan.gateIn); if (plan.gateOut) gateParts.push('出网' + plan.gateOut); if (gateParts.length) add('通道门', gateParts.join(' ')); if (plan.gateBackupList && plan.gateBackupList.length) add('备用通道门', plan.gateBackupList.join('、')); var workerSet = new Set((plan.workers || []).filter(Boolean)); var leaderFinal = plan.leader === '__custom__' ? (plan.leaderCustom || '') : (plan.leader || ''); if (leaderFinal && leaderFinal.trim()) workerSet.add(leaderFinal.trim()); (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); }); (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); });
-                    add('作业人数', workerSet.size);
-                    if (plan.otherCount && plan.otherCount > 0) {
-                        add('其他人数', plan.otherCount);
-                    }
-                    add('作业负责人', leaderFinal);
+                generateSinglePlanHtml: function(plan, index) { var self = this; var items = []; var add = function(label, value) { if (value && value.toString().trim()) items.push({ label: label, value: value }); }; add('作业日期', plan.date); add('作业类型', plan.planType || ''); if ((plan.planType === '点内检查' || plan.planType === '点内维修' || plan.planType === '施工维修') && plan.windowType) { add('天窗类型', plan.windowType); } var startTime = (plan.timeStart || '').trim(); var endTime = (plan.timeEnd || '').trim(); var timeStr = ''; if (startTime && endTime) { var needNextDay = false; var sp = startTime.split(':'); var ep = endTime.split(':'); if (sp.length === 2 && ep.length === 2) { var sm = parseInt(sp[0]) * 60 + parseInt(sp[1]); var em = parseInt(ep[0]) * 60 + parseInt(ep[1]); if (!isNaN(sm) && !isNaN(em) && em < sm) needNextDay = true; } timeStr = startTime + ' — ' + (needNextDay ? '次日' : '') + endTime; } else if (startTime) timeStr = startTime; else if (endTime) timeStr = endTime; if (timeStr) add('作业时间', timeStr); add('线名', plan.lineName); if (plan.direction && plan.direction.length) add('行别', plan.direction.join('、')); var secDisp = ''; var s = plan.startStation || '', e = plan.endStation || ''; var sc = plan.startContains, ec = plan.endContains; if (s || e) { var sd = s + (sc ? '（含）' : ''); var ed = e + (ec ? '（含）' : ''); if (s && !e) secDisp = sd; else if (!s && e) secDisp = ed; else if (s === e) secDisp = sd; else secDisp = sd + '至' + ed; } if (secDisp) add('区段', secDisp); var mileStart = (plan.mileageStart || '').trim(); var mileEnd = (plan.mileageEnd || '').trim(); var fmtMile = function(v) { var parts = v.split('.'); return parts.length === 2 ? 'K' + parts[0] + '+' + parts[1] : v; }; var mileDisp = ''; if (mileStart && mileEnd) mileDisp = fmtMile(mileStart) + '至' + fmtMile(mileEnd); else if (mileStart) mileDisp = fmtMile(mileStart); else if (mileEnd) mileDisp = fmtMile(mileEnd); if (mileDisp) add('作业里程', mileDisp); var locParts = []; if (plan.switchNo) locParts.push('道岔编号:' + plan.switchNo); if (plan.trackNo) locParts.push('股道编号:' + plan.trackNo); if (locParts.length) add('作业地点', locParts.join(' ')); var showReg = ['点外检查', '点外维修', '栅栏网外', '非上道'].indexOf(plan.planType) === -1; if (showReg && plan.registerStation) add('天窗登记站', plan.registerStation); if (plan.stationGuardStation && plan.stationGuardStation.length) add('驻站所在站', plan.stationGuardStation.join('、')); var gateParts = []; if (plan.gateIn) gateParts.push('进网' + plan.gateIn); if (plan.gateOut) gateParts.push('出网' + plan.gateOut); if (gateParts.length) add('通道门', gateParts.join(' ')); if (plan.gateBackupList && plan.gateBackupList.length) add('备用通道门', plan.gateBackupList.join('、')); var workerSet = new Set((plan.workers || []).filter(Boolean)); var leaderFinal = plan.leader === '__custom__' ? (plan.leaderCustom || '') : (plan.leader || ''); if (leaderFinal && leaderFinal.trim()) workerSet.add(leaderFinal.trim()); (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); }); (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); }); add('作业人数', workerSet.size); if (plan.otherCount && plan.otherCount > 0) add('其他人数', plan.otherCount); add('作业负责人', leaderFinal);
                     if (plan.guardStationList && plan.guardStationList.length) { var uniqStation = Array.from(new Set(plan.guardStationList)).filter(function(n) { return n && n !== '__custom__'; }); if (uniqStation.length) add('驻站防护员', uniqStation.join('、')); }
                     if (plan.guardSiteList && plan.guardSiteList.length) { var uniqSite = Array.from(new Set(plan.guardSiteList)).filter(function(n) { return n && n !== '__custom__'; }); if (uniqSite.length) add('工地防护员', uniqSite.join('、')); }
                     if (plan.guardFarList && plan.guardFarList.length) { var uniqFar = Array.from(new Set(plan.guardFarList)).filter(function(n) { return n && n !== '__custom__'; }); if (uniqFar.length) add('远方防护', uniqFar.join('、')); }
@@ -638,34 +617,151 @@
                 addToolOther: function() { var p = this.currentPlan; if (!p) return; var name = p.toolOtherName.trim(); if (!name) { alert('请填写机具名称'); return; } if (!p.toolsOther[name]) this.$set(p.toolsOther, name, 1); p.toolOtherName = ''; this.saveToLocal(); this.refreshPreview(); },
                 removeToolOther: function(name) { var p = this.currentPlan; if (!p) return; this.$delete(p.toolsOther, name); this.saveToLocal(); this.refreshPreview(); },
                 removeTool: function(name) { var p = this.currentPlan; if (!p) return; this.$delete(p.tools, name); var idx = p.toolSelectedList.indexOf(name); if (idx > -1) p.toolSelectedList.splice(idx, 1); this.saveToLocal(); this.refreshPreview(); },
+                getDateTitleStr: function() {
+                    var p = this.currentPlan;
+                    if (!p || !p.date) return '';
+                    var parts = p.date.split('-');
+                    if (parts.length !== 3) return '';
+                    return parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日';
+                },
                 pushCurrentPlanToDingTalk: function() {
                     var plan = this.currentPlan;
                     if (!plan) { alert('请先填写计划信息'); return; }
-                    var title = this.previewTitle || '湖口检查工区计划';
-                    var html = this.generateSinglePlanHtml(plan, this.currentPlanIndex);
-                    var div = document.createElement('div');
-                    div.innerHTML = html;
-                    var body = (div.textContent || div.innerText || '').trim();
-                    if (!body) { alert('当前计划还没有填写内容，请先填写'); return; }
-                    var markdown = '**' + title + '（计划 ' + (this.currentPlanIndex + 1) + '）**\n\n' + body;
-                    this.sendDingTalkMarkdown(markdown, '✅ 当前计划已推送');
+                    var md = '<font color="#dd0000">湖口检查工区' + this.getDateTitleStr() + '计划（共1条计划）</font>\n';
+                    md += '<font color="#1155cc">━━━━━━━━━━━━━━━</font>\n';
+                    md += this.buildPlanMarkdown(plan, this.currentPlanIndex + 1);
+                    this.sendDingTalkMarkdown(md, '✅ 当前计划已推送');
                 },
                 pushAllPlansToDingTalk: function() {
                     if (!this.plans || this.plans.length === 0) { alert('请先添加计划'); return; }
-                    this.refreshPreview();
-                    var title = this.previewTitle || '湖口检查工区计划';
                     var self = this;
-                    var allParts = [];
+                    var md = '<font color="#dd0000">湖口检查工区' + this.getDateTitleStr() + '计划（共' + this.plans.length + '条计划）</font>\n';
+                    md += '<font color="#1155cc">━━━━━━━━━━━━━━━</font>\n';
                     this.plans.forEach(function(plan, index) {
-                        var html = self.generateSinglePlanHtml(plan, index);
-                        var div = document.createElement('div');
-                        div.innerHTML = html;
-                        var body = (div.textContent || div.innerText || '').trim();
-                        if (body) allParts.push(body);
+                        md += self.buildPlanMarkdown(plan, index + 1);
+                        if (index < self.plans.length - 1) {
+                            md += '\n<font color="#1155cc">━━━━━━━━━━━━━━━</font>\n';
+                        }
                     });
-                    if (allParts.length === 0) { alert('计划内容为空，请先填写'); return; }
-                    var markdown = '**' + title + '（共 ' + this.plans.length + ' 条计划）**\n\n' + allParts.join('\n\n───────────────────\n\n');
-                    this.sendDingTalkMarkdown(markdown, '✅ 全部计划已推送');
+                    this.sendDingTalkMarkdown(md, '✅ 全部计划已推送');
+                },
+                buildPlanMarkdown: function(plan, planNo) {
+                    var md = '<font color="#dd0000">计划 ' + planNo + '</font>\n';
+                    if (plan.date) md += '<font color="#dd0000">作业日期：</font> ' + plan.date + '\n';
+                    if (plan.planType) md += '<font color="#dd0000">作业类型：</font> ' + plan.planType + '\n';
+                    if ((plan.planType === '点内检查' || plan.planType === '点内维修' || plan.planType === '施工维修') && plan.windowType) {
+                        md += '<font color="#dd0000">天窗类型：</font> ' + plan.windowType + '\n';
+                    }
+                    var startTime = (plan.timeStart || '').trim();
+                    var endTime = (plan.timeEnd || '').trim();
+                    if (startTime && endTime) {
+                        var needNextDay = false;
+                        var sp = startTime.split(':');
+                        var ep = endTime.split(':');
+                        if (sp.length === 2 && ep.length === 2) {
+                            var sm = parseInt(sp[0]) * 60 + parseInt(sp[1]);
+                            var em = parseInt(ep[0]) * 60 + parseInt(ep[1]);
+                            if (!isNaN(sm) && !isNaN(em) && em < sm) needNextDay = true;
+                        }
+                        md += '<font color="#dd0000">作业时间：</font> ' + startTime + ' — ' + (needNextDay ? '次日' : '') + endTime + '\n';
+                    } else if (startTime) {
+                        md += '<font color="#dd0000">作业时间：</font> ' + startTime + '\n';
+                    } else if (endTime) {
+                        md += '<font color="#dd0000">作业时间：</font> ' + endTime + '\n';
+                    }
+                    if (plan.lineName) md += '<font color="#dd0000">线名：</font> ' + plan.lineName + '\n';
+                    if (plan.direction && plan.direction.length) md += '<font color="#dd0000">行别：</font> ' + plan.direction.join('、') + '\n';
+                    var s = plan.startStation || '', e = plan.endStation || '';
+                    var sc = plan.startContains, ec = plan.endContains;
+                    if (s || e) {
+                        var sd = s + (sc ? '（含）' : '');
+                        var ed = e + (ec ? '（含）' : '');
+                        var secDisp = '';
+                        if (s && !e) secDisp = sd;
+                        else if (!s && e) secDisp = ed;
+                        else if (s === e) secDisp = sd;
+                        else secDisp = sd + '至' + ed;
+                        md += '<font color="#dd0000">区段：</font> ' + secDisp + '\n';
+                    }
+                    var fmtMile = function(v) { var parts = v.split('.'); return parts.length === 2 ? 'K' + parts[0] + '+' + parts[1] : v; };
+                    var mileStart = (plan.mileageStart || '').trim();
+                    var mileEnd = (plan.mileageEnd || '').trim();
+                    if (mileStart && mileEnd) {
+                        md += '<font color="#dd0000">作业里程：</font> ' + fmtMile(mileStart) + '至' + fmtMile(mileEnd) + '\n';
+                    } else if (mileStart) {
+                        md += '<font color="#dd0000">作业里程：</font> ' + fmtMile(mileStart) + '\n';
+                    } else if (mileEnd) {
+                        md += '<font color="#dd0000">作业里程：</font> ' + fmtMile(mileEnd) + '\n';
+                    }
+                    var locParts = [];
+                    if (plan.switchNo) locParts.push('道岔编号:' + plan.switchNo);
+                    if (plan.trackNo) locParts.push('股道编号:' + plan.trackNo);
+                    if (locParts.length) md += '<font color="#dd0000">作业地点：</font> ' + locParts.join(' ') + '\n';
+                    var showReg = ['点外检查', '点外维修', '栅栏网外', '非上道'].indexOf(plan.planType) === -1;
+                    if (showReg && plan.registerStation) md += '<font color="#dd0000">天窗登记站：</font> ' + plan.registerStation + '\n';
+                    if (plan.stationGuardStation && plan.stationGuardStation.length) {
+                        md += '<font color="#dd0000">驻站所在站：</font> ' + plan.stationGuardStation.join('、') + '\n';
+                    }
+                    var gateParts = [];
+                    if (plan.gateIn) gateParts.push('进网' + plan.gateIn);
+                    if (plan.gateOut) gateParts.push('出网' + plan.gateOut);
+                    if (gateParts.length) md += '<font color="#dd0000">通道门：</font> ' + gateParts.join(' ') + '\n';
+                    if (plan.gateBackupList && plan.gateBackupList.length) md += '<font color="#dd0000">备用通道门：</font> ' + plan.gateBackupList.join('、') + '\n';
+                    var workerSet = new Set((plan.workers || []).filter(Boolean));
+                    var leaderFinal = plan.leader === '__custom__' ? (plan.leaderCustom || '') : (plan.leader || '');
+                    if (leaderFinal && leaderFinal.trim()) workerSet.add(leaderFinal.trim());
+                    (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); });
+                    (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); });
+                    md += '<font color="#dd0000">作业人数：</font> ' + workerSet.size + '\n';
+                    if (plan.otherCount && plan.otherCount > 0) md += '<font color="#dd0000">其他人数：</font> ' + plan.otherCount + '\n';
+                    if (leaderFinal) md += '<font color="#dd0000">作业负责人：</font> ' + leaderFinal + '\n';
+                    if (plan.guardStationList && plan.guardStationList.length) {
+                        var uniqStation = Array.from(new Set(plan.guardStationList)).filter(function(n) { return n && n !== '__custom__'; });
+                        if (uniqStation.length) md += '<font color="#dd0000">驻站防护员：</font> ' + uniqStation.join('、') + '\n';
+                    }
+                    if (plan.guardSiteList && plan.guardSiteList.length) {
+                        var uniqSite = Array.from(new Set(plan.guardSiteList)).filter(function(n) { return n && n !== '__custom__'; });
+                        if (uniqSite.length) md += '<font color="#dd0000">工地防护员：</font> ' + uniqSite.join('、') + '\n';
+                    }
+                    if (plan.guardFarList && plan.guardFarList.length) {
+                        var uniqFar = Array.from(new Set(plan.guardFarList)).filter(function(n) { return n && n !== '__custom__'; });
+                        if (uniqFar.length) md += '<font color="#dd0000">远方防护：</font> ' + uniqFar.join('、') + '\n';
+                    }
+                    var workItems = (plan.workItems || []).filter(function(w) { return w && w !== '__custom__'; });
+                    if (workItems.length) md += '<font color="#dd0000">作业项目：</font> ' + workItems.join('、') + '\n';
+                    var allTools = {};
+                    for (var k in plan.tools) allTools[k] = plan.tools[k];
+                    for (var k2 in plan.toolsOther) allTools[k2] = plan.toolsOther[k2];
+                    var toolStr = Object.keys(allTools).filter(function(key) { return allTools[key] && allTools[key].toString().trim(); }).map(function(key) { return key + allTools[key]; }).join('、');
+                    if (toolStr) md += '<font color="#dd0000">作业机具：</font> ' + toolStr + '\n';
+                    if (plan.crossLinePosition && plan.crossLinePosition.trim()) md += '<font color="#dd0000">跨线位置：</font> ' + plan.crossLinePosition.trim() + '\n';
+                    var phoneFinal = plan.phone === '__custom__' ? (plan.phoneCustom || '') : (plan.phone || '');
+                    if (phoneFinal) md += '<font color="#dd0000">定位手机：</font> ' + phoneFinal + '\n';
+                    var camArr = Object.keys(plan.camera || {}).filter(function(key) { return plan.camera[key] && plan.camera[key].trim(); }).map(function(key) { return key + plan.camera[key]; });
+                    if (plan.cameraOtherName && plan.cameraOtherVal) camArr.push(plan.cameraOtherName + plan.cameraOtherVal);
+                    if (camArr.length) md += '<font color="#dd0000">执法仪编号：</font> ' + camArr.join('；') + '\n';
+                    var allWorkers = new Set();
+                    (plan.workers || []).forEach(function(w) { if (w && w !== '__custom__') allWorkers.add(w); });
+                    if (leaderFinal) allWorkers.add(leaderFinal);
+                    (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); });
+                    (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); });
+                    if (allWorkers.size) md += '<font color="#dd0000">作业人员：</font> ' + Array.from(allWorkers).join('、') + '\n';
+                    var roleSet = new Set();
+                    if (leaderFinal && leaderFinal.trim()) roleSet.add(leaderFinal.trim());
+                    (plan.guardStationList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); });
+                    (plan.guardSiteList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); });
+                    (plan.guardFarList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); });
+                    var selectedWorkers = new Set((plan.workers || []).filter(function(w) { return w && w !== '__custom__'; }));
+                    var otherItems = [];
+                    this.fixedWorkerOptions.forEach(function(name) {
+                        if (!roleSet.has(name) && !selectedWorkers.has(name)) {
+                            var remark = (plan.otherRemarkV2 && plan.otherRemarkV2[name]) || '';
+                            otherItems.push(remark.trim() ? name + '(' + remark.trim() + ')' : name);
+                        }
+                    });
+                    if (otherItems.length) md += '<font color="#dd0000">其他人员：</font> ' + otherItems.join('、') + '\n';
+                    if (plan.supplementNote && plan.supplementNote.trim()) md += '<font color="#dd0000">补充说明：</font> ' + plan.supplementNote.trim() + '\n';
+                    return md;
                 },
                 sendDingTalkMarkdown: function(markdown, successMsg) {
                     var self = this;
