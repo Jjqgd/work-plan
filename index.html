@@ -627,30 +627,30 @@
                 pushCurrentPlanToDingTalk: function() {
                     var plan = this.currentPlan;
                     if (!plan) { alert('请先填写计划信息'); return; }
-                    var md = '<font color="#dd0000">湖口检查工区' + this.getDateTitleStr() + '计划（共1条计划）</font>\n';
-                    md += '<font color="#1155cc">━━━━━━━━━━━━━━━</font>\n';
+                    var md = '**湖口检查工区' + this.getDateTitleStr() + '计划（共1条计划）**\n\n';
+                    md += '---\n\n';
                     md += this.buildPlanMarkdown(plan, this.currentPlanIndex + 1);
                     this.sendDingTalkMarkdown(md, '✅ 当前计划已推送');
                 },
                 pushAllPlansToDingTalk: function() {
                     if (!this.plans || this.plans.length === 0) { alert('请先添加计划'); return; }
                     var self = this;
-                    var md = '<font color="#dd0000">湖口检查工区' + this.getDateTitleStr() + '计划（共' + this.plans.length + '条计划）</font>\n';
-                    md += '<font color="#1155cc">━━━━━━━━━━━━━━━</font>\n';
+                    var md = '**湖口检查工区' + this.getDateTitleStr() + '计划（共' + this.plans.length + '条计划）**\n\n';
+                    md += '---\n\n';
                     this.plans.forEach(function(plan, index) {
                         md += self.buildPlanMarkdown(plan, index + 1);
                         if (index < self.plans.length - 1) {
-                            md += '\n<font color="#1155cc">━━━━━━━━━━━━━━━</font>\n';
+                            md += '\n---\n\n';
                         }
                     });
                     this.sendDingTalkMarkdown(md, '✅ 全部计划已推送');
                 },
                 buildPlanMarkdown: function(plan, planNo) {
-                    var md = '<font color="#dd0000">计划 ' + planNo + '</font>\n';
-                    if (plan.date) md += '<font color="#dd0000">作业日期：</font> ' + plan.date + '\n';
-                    if (plan.planType) md += '<font color="#dd0000">作业类型：</font> ' + plan.planType + '\n';
+                    var md = '**计划 ' + planNo + '**\n\n';
+                    if (plan.date) md += '**作业日期：** ' + plan.date + '\n\n';
+                    if (plan.planType) md += '**作业类型：** ' + plan.planType + '\n\n';
                     if ((plan.planType === '点内检查' || plan.planType === '点内维修' || plan.planType === '施工维修') && plan.windowType) {
-                        md += '<font color="#dd0000">天窗类型：</font> ' + plan.windowType + '\n';
+                        md += '**天窗类型：** ' + plan.windowType + '\n\n';
                     }
                     var startTime = (plan.timeStart || '').trim();
                     var endTime = (plan.timeEnd || '').trim();
@@ -663,14 +663,14 @@
                             var em = parseInt(ep[0]) * 60 + parseInt(ep[1]);
                             if (!isNaN(sm) && !isNaN(em) && em < sm) needNextDay = true;
                         }
-                        md += '<font color="#dd0000">作业时间：</font> ' + startTime + ' — ' + (needNextDay ? '次日' : '') + endTime + '\n';
+                        md += '**作业时间：** ' + startTime + ' — ' + (needNextDay ? '次日' : '') + endTime + '\n\n';
                     } else if (startTime) {
-                        md += '<font color="#dd0000">作业时间：</font> ' + startTime + '\n';
+                        md += '**作业时间：** ' + startTime + '\n\n';
                     } else if (endTime) {
-                        md += '<font color="#dd0000">作业时间：</font> ' + endTime + '\n';
+                        md += '**作业时间：** ' + endTime + '\n\n';
                     }
-                    if (plan.lineName) md += '<font color="#dd0000">线名：</font> ' + plan.lineName + '\n';
-                    if (plan.direction && plan.direction.length) md += '<font color="#dd0000">行别：</font> ' + plan.direction.join('、') + '\n';
+                    if (plan.lineName) md += '**线名：** ' + plan.lineName + '\n\n';
+                    if (plan.direction && plan.direction.length) md += '**行别：** ' + plan.direction.join('、') + '\n\n';
                     var s = plan.startStation || '', e = plan.endStation || '';
                     var sc = plan.startContains, ec = plan.endContains;
                     if (s || e) {
@@ -681,71 +681,71 @@
                         else if (!s && e) secDisp = ed;
                         else if (s === e) secDisp = sd;
                         else secDisp = sd + '至' + ed;
-                        md += '<font color="#dd0000">区段：</font> ' + secDisp + '\n';
+                        md += '**区段：** ' + secDisp + '\n\n';
                     }
                     var fmtMile = function(v) { var parts = v.split('.'); return parts.length === 2 ? 'K' + parts[0] + '+' + parts[1] : v; };
                     var mileStart = (plan.mileageStart || '').trim();
                     var mileEnd = (plan.mileageEnd || '').trim();
                     if (mileStart && mileEnd) {
-                        md += '<font color="#dd0000">作业里程：</font> ' + fmtMile(mileStart) + '至' + fmtMile(mileEnd) + '\n';
+                        md += '**作业里程：** ' + fmtMile(mileStart) + '至' + fmtMile(mileEnd) + '\n\n';
                     } else if (mileStart) {
-                        md += '<font color="#dd0000">作业里程：</font> ' + fmtMile(mileStart) + '\n';
+                        md += '**作业里程：** ' + fmtMile(mileStart) + '\n\n';
                     } else if (mileEnd) {
-                        md += '<font color="#dd0000">作业里程：</font> ' + fmtMile(mileEnd) + '\n';
+                        md += '**作业里程：** ' + fmtMile(mileEnd) + '\n\n';
                     }
                     var locParts = [];
                     if (plan.switchNo) locParts.push('道岔编号:' + plan.switchNo);
                     if (plan.trackNo) locParts.push('股道编号:' + plan.trackNo);
-                    if (locParts.length) md += '<font color="#dd0000">作业地点：</font> ' + locParts.join(' ') + '\n';
+                    if (locParts.length) md += '**作业地点：** ' + locParts.join(' ') + '\n\n';
                     var showReg = ['点外检查', '点外维修', '栅栏网外', '非上道'].indexOf(plan.planType) === -1;
-                    if (showReg && plan.registerStation) md += '<font color="#dd0000">天窗登记站：</font> ' + plan.registerStation + '\n';
+                    if (showReg && plan.registerStation) md += '**天窗登记站：** ' + plan.registerStation + '\n\n';
                     if (plan.stationGuardStation && plan.stationGuardStation.length) {
-                        md += '<font color="#dd0000">驻站所在站：</font> ' + plan.stationGuardStation.join('、') + '\n';
+                        md += '**驻站所在站：** ' + plan.stationGuardStation.join('、') + '\n\n';
                     }
                     var gateParts = [];
                     if (plan.gateIn) gateParts.push('进网' + plan.gateIn);
                     if (plan.gateOut) gateParts.push('出网' + plan.gateOut);
-                    if (gateParts.length) md += '<font color="#dd0000">通道门：</font> ' + gateParts.join(' ') + '\n';
-                    if (plan.gateBackupList && plan.gateBackupList.length) md += '<font color="#dd0000">备用通道门：</font> ' + plan.gateBackupList.join('、') + '\n';
+                    if (gateParts.length) md += '**通道门：** ' + gateParts.join(' ') + '\n\n';
+                    if (plan.gateBackupList && plan.gateBackupList.length) md += '**备用通道门：** ' + plan.gateBackupList.join('、') + '\n\n';
                     var workerSet = new Set((plan.workers || []).filter(Boolean));
                     var leaderFinal = plan.leader === '__custom__' ? (plan.leaderCustom || '') : (plan.leader || '');
                     if (leaderFinal && leaderFinal.trim()) workerSet.add(leaderFinal.trim());
                     (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); });
                     (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') workerSet.add(n); });
-                    md += '<font color="#dd0000">作业人数：</font> ' + workerSet.size + '\n';
-                    if (plan.otherCount && plan.otherCount > 0) md += '<font color="#dd0000">其他人数：</font> ' + plan.otherCount + '\n';
-                    if (leaderFinal) md += '<font color="#dd0000">作业负责人：</font> ' + leaderFinal + '\n';
+                    md += '**作业人数：** ' + workerSet.size + '\n\n';
+                    if (plan.otherCount && plan.otherCount > 0) md += '**其他人数：** ' + plan.otherCount + '\n\n';
+                    if (leaderFinal) md += '**作业负责人：** ' + leaderFinal + '\n\n';
                     if (plan.guardStationList && plan.guardStationList.length) {
                         var uniqStation = Array.from(new Set(plan.guardStationList)).filter(function(n) { return n && n !== '__custom__'; });
-                        if (uniqStation.length) md += '<font color="#dd0000">驻站防护员：</font> ' + uniqStation.join('、') + '\n';
+                        if (uniqStation.length) md += '**驻站防护员：** ' + uniqStation.join('、') + '\n\n';
                     }
                     if (plan.guardSiteList && plan.guardSiteList.length) {
                         var uniqSite = Array.from(new Set(plan.guardSiteList)).filter(function(n) { return n && n !== '__custom__'; });
-                        if (uniqSite.length) md += '<font color="#dd0000">工地防护员：</font> ' + uniqSite.join('、') + '\n';
+                        if (uniqSite.length) md += '**工地防护员：** ' + uniqSite.join('、') + '\n\n';
                     }
                     if (plan.guardFarList && plan.guardFarList.length) {
                         var uniqFar = Array.from(new Set(plan.guardFarList)).filter(function(n) { return n && n !== '__custom__'; });
-                        if (uniqFar.length) md += '<font color="#dd0000">远方防护：</font> ' + uniqFar.join('、') + '\n';
+                        if (uniqFar.length) md += '**远方防护：** ' + uniqFar.join('、') + '\n\n';
                     }
                     var workItems = (plan.workItems || []).filter(function(w) { return w && w !== '__custom__'; });
-                    if (workItems.length) md += '<font color="#dd0000">作业项目：</font> ' + workItems.join('、') + '\n';
+                    if (workItems.length) md += '**作业项目：** ' + workItems.join('、') + '\n\n';
                     var allTools = {};
                     for (var k in plan.tools) allTools[k] = plan.tools[k];
                     for (var k2 in plan.toolsOther) allTools[k2] = plan.toolsOther[k2];
                     var toolStr = Object.keys(allTools).filter(function(key) { return allTools[key] && allTools[key].toString().trim(); }).map(function(key) { return key + allTools[key]; }).join('、');
-                    if (toolStr) md += '<font color="#dd0000">作业机具：</font> ' + toolStr + '\n';
-                    if (plan.crossLinePosition && plan.crossLinePosition.trim()) md += '<font color="#dd0000">跨线位置：</font> ' + plan.crossLinePosition.trim() + '\n';
+                    if (toolStr) md += '**作业机具：** ' + toolStr + '\n\n';
+                    if (plan.crossLinePosition && plan.crossLinePosition.trim()) md += '**跨线位置：** ' + plan.crossLinePosition.trim() + '\n\n';
                     var phoneFinal = plan.phone === '__custom__' ? (plan.phoneCustom || '') : (plan.phone || '');
-                    if (phoneFinal) md += '<font color="#dd0000">定位手机：</font> ' + phoneFinal + '\n';
+                    if (phoneFinal) md += '**定位手机：** ' + phoneFinal + '\n\n';
                     var camArr = Object.keys(plan.camera || {}).filter(function(key) { return plan.camera[key] && plan.camera[key].trim(); }).map(function(key) { return key + plan.camera[key]; });
                     if (plan.cameraOtherName && plan.cameraOtherVal) camArr.push(plan.cameraOtherName + plan.cameraOtherVal);
-                    if (camArr.length) md += '<font color="#dd0000">执法仪编号：</font> ' + camArr.join('；') + '\n';
+                    if (camArr.length) md += '**执法仪编号：** ' + camArr.join('；') + '\n\n';
                     var allWorkers = new Set();
                     (plan.workers || []).forEach(function(w) { if (w && w !== '__custom__') allWorkers.add(w); });
                     if (leaderFinal) allWorkers.add(leaderFinal);
                     (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); });
                     (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); });
-                    if (allWorkers.size) md += '<font color="#dd0000">作业人员：</font> ' + Array.from(allWorkers).join('、') + '\n';
+                    if (allWorkers.size) md += '**作业人员：** ' + Array.from(allWorkers).join('、') + '\n\n';
                     var roleSet = new Set();
                     if (leaderFinal && leaderFinal.trim()) roleSet.add(leaderFinal.trim());
                     (plan.guardStationList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); });
@@ -759,8 +759,8 @@
                             otherItems.push(remark.trim() ? name + '(' + remark.trim() + ')' : name);
                         }
                     });
-                    if (otherItems.length) md += '<font color="#dd0000">其他人员：</font> ' + otherItems.join('、') + '\n';
-                    if (plan.supplementNote && plan.supplementNote.trim()) md += '<font color="#dd0000">补充说明：</font> ' + plan.supplementNote.trim() + '\n';
+                    if (otherItems.length) md += '**其他人员：** ' + otherItems.join('、') + '\n\n';
+                    if (plan.supplementNote && plan.supplementNote.trim()) md += '**补充说明：** ' + plan.supplementNote.trim() + '\n\n';
                     return md;
                 },
                 sendDingTalkMarkdown: function(markdown, successMsg) {
