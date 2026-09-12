@@ -1,8 +1,19 @@
 // netlify/functions/send-daily-check.js
-// 与日检查总结共用同一个钉钉机器人
+// 钉钉推送代理（带加签）
+
+const crypto = require('crypto');
 
 const TOKEN = '162e271b16f090316ebf7bec83a9addcae2ae9dbafe1c8d5293c0a1c7eea9e0c';
-const DINGTALK_WEBHOOK = `https://oapi.dingtalk.com/robot/send?access_token=${TOKEN}`;
+const SECRET = 'SECc9ee5e38d415504f2d8ef65f53724a';
+
+function sign(secret) {
+    const timestamp = Date.now();
+    const stringToSign = timestamp + '\n' + secret;
+    const hmac = crypto.createHmac('sha256', secret);
+    hmac.update(stringToSign);
+    const sign = encodeURIComponent(hmac.digest('base64'));
+    return { timestamp, sign };
+}
 
 exports.handler = async function(event, context) {
     if (event.httpMethod !== 'POST') {
@@ -13,7 +24,10 @@ exports.handler = async function(event, context) {
     }
 
     try {
-        const response = await fetch(DINGTALK_WEBHOOK, {
+        const { timestamp, sign: signed } = sign(SECRET);
+        const url = `https://oapi.dingtalk.com/robot/send?access_token=${TOKEN}&timestamp=${timestamp}&sign=${signed}`;
+
+        const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: event.body
