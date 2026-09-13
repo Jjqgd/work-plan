@@ -366,19 +366,39 @@
                 <div>
                     <label>驻站防护 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
                     <dropdown-multi :options="guardStationOptionsWithCustom" v-model="currentPlan.guardStationList" placeholder="请选择"></dropdown-multi>
+                    <div class="add-row" v-if="showGuardStationCustom" style="margin-top:6px;">
+                        <span class="text-muted">✏️ 自定义</span>
+                        <input type="text" v-model="currentPlan.guardStationCustom" placeholder="姓名" />
+                        <button class="btn-sm" @click="addGuardStationCustom">添加</button>
+                    </div>
                 </div>
                 <div>
                     <label>工地防护 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
                     <dropdown-multi :options="guardSiteOptionsWithCustom" v-model="currentPlan.guardSiteList" placeholder="请选择"></dropdown-multi>
+                    <div class="add-row" v-if="showGuardSiteCustom" style="margin-top:6px;">
+                        <span class="text-muted">✏️ 自定义</span>
+                        <input type="text" v-model="currentPlan.guardSiteCustom" placeholder="姓名" />
+                        <button class="btn-sm" @click="addGuardSiteCustom">添加</button>
+                    </div>
                 </div>
             </div>
             <div class="form-item full">
                 <label>远方防护 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
                 <dropdown-multi :options="guardFarOptionsWithCustom" v-model="currentPlan.guardFarList" placeholder="请选择"></dropdown-multi>
+                <div class="add-row" v-if="showGuardFarCustom" style="margin-top:6px;">
+                    <span class="text-muted">✏️ 自定义</span>
+                    <input type="text" v-model="currentPlan.guardFarCustom" placeholder="姓名" />
+                    <button class="btn-sm" @click="addGuardFarCustom">添加</button>
+                </div>
             </div>
 
             <div class="form-item full"><label>作业人员 <span class="conflict-icon" v-if="hasRoleConflict">🔺</span></label>
                 <dropdown-multi :options="workerOptionsWithCustom" v-model="currentPlan.workers" placeholder="选择作业人员"></dropdown-multi>
+                <div class="add-row" v-if="showWorkerCustom" style="margin-top:6px;">
+                    <span class="text-muted">✏️ 自定义</span>
+                    <input type="text" v-model="currentPlan.workerCustom" placeholder="姓名" />
+                    <button class="btn-sm" @click="addWorkerCustom">添加</button>
+                </div>
                 <div class="clear-row" v-if="currentPlan.workers && currentPlan.workers.length">
                     <button class="btn-sm-danger" @click="clearAllWorkers">清除所有</button>
                 </div>
@@ -386,6 +406,11 @@
 
             <div class="form-item full"><label>作业项目</label>
                 <dropdown-multi :options="workItemsOptionsWithCustom" v-model="currentPlan.workItems" placeholder="选择作业项目"></dropdown-multi>
+                <div class="add-row" v-if="showWorkItemCustom" style="margin-top:6px;">
+                    <span class="text-muted">✏️ 自定义</span>
+                    <input type="text" v-model="currentPlan.workItemCustom" placeholder="项目名称" />
+                    <button class="btn-sm" @click="addWorkItemCustom">添加</button>
+                </div>
                 <div class="clear-row" v-if="currentPlan.workItems && currentPlan.workItems.length">
                     <button class="btn-sm-danger" @click="clearAllWorkItems">清除所有</button>
                 </div>
@@ -539,7 +564,12 @@
                     opts.push({ label: '✏️ 自定义', value: '__custom__' });
                     return opts;
                 },
-                workItemsOptionsWithCustom: function() { var opts = this.workItemsBaseOptions.map(function(item) { return { label: item, value: item }; }); opts.push({ label: '✏️ 自定义', value: '__custom__' }); return opts; }
+                workItemsOptionsWithCustom: function() { var opts = this.workItemsBaseOptions.map(function(item) { return { label: item, value: item }; }); opts.push({ label: '✏️ 自定义', value: '__custom__' }); return opts; },
+                showGuardStationCustom: function() { var list = this.currentPlan ? this.currentPlan.guardStationList : []; return list && list.indexOf('__custom__') !== -1; },
+                showGuardSiteCustom: function() { var list = this.currentPlan ? this.currentPlan.guardSiteList : []; return list && list.indexOf('__custom__') !== -1; },
+                showGuardFarCustom: function() { var list = this.currentPlan ? this.currentPlan.guardFarList : []; return list && list.indexOf('__custom__') !== -1; },
+                showWorkerCustom: function() { var list = this.currentPlan ? this.currentPlan.workers : []; return list && list.indexOf('__custom__') !== -1; },
+                showWorkItemCustom: function() { var list = this.currentPlan ? this.currentPlan.workItems : []; return list && list.indexOf('__custom__') !== -1; }
             },
             watch: {
                 workerCount: function() {
@@ -566,6 +596,11 @@
             methods: {
                 clearAllWorkers: function() { var p = this.currentPlan; if (!p) return; p.workers = []; this.saveToLocal(); this.refreshPreview(); },
                 clearAllWorkItems: function() { var p = this.currentPlan; if (!p) return; p.workItems = []; this.saveToLocal(); this.refreshPreview(); },
+                addGuardStationCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.guardStationCustom || '').trim(); if (!name) { alert('请填写姓名'); return; } var list = p.guardStationList || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.guardStationList = list; p.guardStationCustom = ''; this.saveToLocal(); this.refreshPreview(); },
+                addGuardSiteCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.guardSiteCustom || '').trim(); if (!name) { alert('请填写姓名'); return; } var list = p.guardSiteList || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.guardSiteList = list; p.guardSiteCustom = ''; this.saveToLocal(); this.refreshPreview(); },
+                addGuardFarCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.guardFarCustom || '').trim(); if (!name) { alert('请填写姓名'); return; } var list = p.guardFarList || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.guardFarList = list; p.guardFarCustom = ''; this.saveToLocal(); this.refreshPreview(); },
+                addWorkerCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.workerCustom || '').trim(); if (!name) { alert('请填写姓名'); return; } var list = p.workers || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.workers = list; p.workerCustom = ''; this.saveToLocal(); this.refreshPreview(); },
+                addWorkItemCustom: function() { var p = this.currentPlan; if (!p) return; var name = (p.workItemCustom || '').trim(); if (!name) { alert('请填写项目名称'); return; } var list = p.workItems || []; var idx = list.indexOf('__custom__'); if (idx !== -1) list.splice(idx, 1); if (list.indexOf(name) === -1) list.push(name); p.workItems = list; p.workItemCustom = ''; this.saveToLocal(); this.refreshPreview(); },
                 handleToolSelect: function(opt) {
                     var p = this.currentPlan;
                     if (!p || !opt) return;
@@ -588,7 +623,7 @@
                 saveToLocal: function() { try { localStorage.setItem('hukou_plans', JSON.stringify(this.plans)); localStorage.setItem('hukou_plan_index', String(this.currentPlanIndex)); this.saveStatus = '✅ 已自动保存 ' + new Date().toLocaleTimeString(); var self = this; setTimeout(function() { self.saveStatus = ''; }, 2000); } catch(e) {} },
                 loadFromLocal: function() { try { var data = localStorage.getItem('hukou_plans'); var idx = localStorage.getItem('hukou_plan_index'); if (data) { var parsed = JSON.parse(data); if (Array.isArray(parsed) && parsed.length > 0) { this.plans = parsed; if (idx !== null && parseInt(idx) < this.plans.length) { this.currentPlanIndex = parseInt(idx); } else { this.currentPlanIndex = 0; } return true; } } } catch(e) {} return false; },
                 getTomorrow: function() { var d = new Date(); d.setDate(d.getDate() + 1); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); },
-                createDefaultPlan: function() { return { date: this.getTomorrow(), planType: '点内检查', windowType: '', timeStart: '', timeEnd: '', lineName: '', direction: [], startStation: '', endStation: '', startContains: false, endContains: false, mileageStart: '', mileageEnd: '', trackNo: '', switchNo: '', registerStation: '', stationGuardStation: [], gateIn: '', gateOut: '', gateBackupList: [], leader: '', leaderCustom: '', guardStationList: [], guardSiteList: [], guardFarList: [], workers: [], workItems: [], tools: {}, toolsOther: {}, toolSelectedList: [], toolOtherName: '', crossLinePosition: '', phone: '', phoneCustom: '', camera: {}, cameraOtherName: '', cameraOtherVal: '', otherRemarkV2: {}, otherCount: 0, supplementNote: '' }; },
+                createDefaultPlan: function() { return { date: this.getTomorrow(), planType: '点内检查', windowType: '', timeStart: '', timeEnd: '', lineName: '', direction: [], startStation: '', endStation: '', startContains: false, endContains: false, mileageStart: '', mileageEnd: '', trackNo: '', switchNo: '', registerStation: '', stationGuardStation: [], gateIn: '', gateOut: '', gateBackupList: [], leader: '', leaderCustom: '', guardStationList: [], guardStationCustom: '', guardSiteList: [], guardSiteCustom: '', guardFarList: [], guardFarCustom: '', workers: [], workerCustom: '', workItems: [], workItemCustom: '', tools: {}, toolsOther: {}, toolSelectedList: [], toolOtherName: '', crossLinePosition: '', phone: '', phoneCustom: '', camera: {}, cameraOtherName: '', cameraOtherVal: '', otherRemarkV2: {}, otherCount: 0, supplementNote: '' }; },
                 addPlan: function() { this.plans.push(this.createDefaultPlan()); this.currentPlanIndex = this.plans.length - 1; this.saveToLocal(); this.refreshPreview(); },
                 copyCurrentPlan: function() { var p = this.currentPlan; if (!p) { alert('请先选择要复制的计划'); return; } var copy = deepClone(p); copy.date = this.getTomorrow(); copy.timeStart = ''; copy.timeEnd = ''; copy.tools = {}; copy.toolsOther = {}; copy.toolSelectedList = []; copy.guardStationList = []; copy.guardSiteList = []; copy.guardFarList = []; copy.workers = []; copy.workItems = []; this.plans.push(copy); this.currentPlanIndex = this.plans.length - 1; this.saveToLocal(); this.refreshPreview(); this.copyMsg = '✅ 已复制当前计划'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 2000); },
                 deleteCurrentPlan: function() { if (this.plans.length <= 1) { alert('至少保留一条计划'); return; } var idx = this.currentPlanIndex; if (!confirm('确认删除「计划 ' + (idx + 1) + '」吗？')) return; this.plans.splice(idx, 1); if (idx >= this.plans.length) { this.currentPlanIndex = this.plans.length - 1; } else { this.currentPlanIndex = idx; } this.saveToLocal(); this.refreshPreview(); this.copyMsg = '🗑️ 已删除计划 ' + (idx + 1); var self = this; setTimeout(function() { self.copyMsg = ''; }, 2000); },
