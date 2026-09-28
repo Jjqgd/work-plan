@@ -444,6 +444,26 @@
                 <textarea v-model="currentPlan.supplementNote" rows="2" placeholder="请填写补充说明..." @input="refreshPreview"></textarea>
             </div>
 
+            <div class="form-item full">
+                <label>是否需要工程车配合</label>
+                <div class="inline-flex">
+                    <label :class="{ 'radio-selected': currentPlan.needTruck === '是' }">
+                        <input type="radio" value="是" v-model="currentPlan.needTruck" @change="refreshPreview" /> 是
+                    </label>
+                    <label :class="{ 'radio-selected': currentPlan.needTruck === '否' }">
+                        <input type="radio" value="否" v-model="currentPlan.needTruck" @change="refreshPreview" /> 否
+                    </label>
+                </div>
+                <textarea
+                    v-if="currentPlan.needTruck === '是'"
+                    v-model="currentPlan.truckDetail"
+                    rows="2"
+                    placeholder="请填写工程车配合内容（车号、司机、进出时间等）"
+                    @input="refreshPreview"
+                    style="margin-top:6px;"
+                ></textarea>
+            </div>
+
             <div class="form-item full"><label>其他人员</label><div class="other-persons-grid"><template v-if="otherPersonsFromWorkers.length"><span v-for="name in otherPersonsFromWorkers" :key="name" class="other-person-item"><span class="name">{{ name }}</span><input type="text" v-model="currentPlan.otherRemarkV2[name]" placeholder="备注" @input="refreshPreview" /></span></template><span v-else style="color:var(--text-light);font-size:0.78rem;grid-column:1/-1;text-align:center;padding:10px 0;">（所有人员均已担任角色或在作业人员列表中）</span></div></div>
         </div>
 
@@ -514,11 +534,11 @@
             el: '#app',
             data: {
                 plans: [], currentPlanIndex: 0, copyMsg: '', richTextContent: '', saveStatus: '',
-                fixedWorkerOptions: ['刘奔', '于凌云', '庄同健', '李晓红', '冯少均', '毛富强', '张继锋', '王杰', '于锋', '唐鹏', '吴静艺', '杨菀莹'],
+                fixedWorkerOptions: ['刘奔', '于凌云', '庄同健', '李晓红', '冯少均', '毛富强', '张继锋', '王杰', '于锋', '唐鹏', '吴静艺'],
                 leaderOptions: ['刘奔', '于凌云', '庄同健'],
                 guardStationBaseOptions: ['冯少均', '毛富强', '唐鹏'],
                 guardSiteBaseOptions: ['冯少均', '于凌云', '唐鹏', '李晓红', '王杰', '毛富强', '刘奔'],
-                workerBaseOptions: ['刘奔', '于凌云', '庄同健', '李晓红', '冯少均', '毛富强', '张继锋', '王杰', '于锋', '唐鹏', '吴静艺', '杨菀莹'],
+                workerBaseOptions: ['刘奔', '于凌云', '庄同健', '李晓红', '冯少均', '毛富强', '张继锋', '王杰', '于锋', '唐鹏', '吴静艺'],
                 workItemsBaseOptions: ['道岔检查', '站线手工检查', '钢轨磨耗测量', '无缝线路位移观测', '轨道检查仪检查', '线路几何尺寸小车检查', '线路设备巡检', '曲线正矢检查', '道岔降低值测量', '道岔磨耗测量', '学习', '培训', '整理库房'],
                 toolOptions: ['道尺', '支距尺', '检查锤', '弦线', '塞尺', '钢直尺', '1米平直尺', '轨检仪', '电脑包', '无缝线路位移观测仪', '移动照明灯', '多功能测量尺', '钢轨辙叉磨耗仪', '降低值测量尺', '布卷尺', '钢卷尺', '油漆', '排笔', '油漆刷', '字模', '篷布', '防护备品', '尖轨侧磨尺', '头灯', '钢轨磨耗仪', '钢丝刷'],
                 gateData: [
@@ -623,7 +643,7 @@
                 saveToLocal: function() { try { localStorage.setItem('hukou_plans', JSON.stringify(this.plans)); localStorage.setItem('hukou_plan_index', String(this.currentPlanIndex)); this.saveStatus = '✅ 已自动保存 ' + new Date().toLocaleTimeString(); var self = this; setTimeout(function() { self.saveStatus = ''; }, 2000); } catch(e) {} },
                 loadFromLocal: function() { try { var data = localStorage.getItem('hukou_plans'); var idx = localStorage.getItem('hukou_plan_index'); if (data) { var parsed = JSON.parse(data); if (Array.isArray(parsed) && parsed.length > 0) { this.plans = parsed; if (idx !== null && parseInt(idx) < this.plans.length) { this.currentPlanIndex = parseInt(idx); } else { this.currentPlanIndex = 0; } return true; } } } catch(e) {} return false; },
                 getTomorrow: function() { var d = new Date(); d.setDate(d.getDate() + 1); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); },
-                createDefaultPlan: function() { return { date: this.getTomorrow(), planType: '点内检查', windowType: '', timeStart: '', timeEnd: '', lineName: '', direction: [], startStation: '', endStation: '', startContains: false, endContains: false, mileageStart: '', mileageEnd: '', trackNo: '', switchNo: '', registerStation: '', stationGuardStation: [], gateIn: '', gateOut: '', gateBackupList: [], leader: '', leaderCustom: '', guardStationList: [], guardStationCustom: '', guardSiteList: [], guardSiteCustom: '', guardFarList: [], guardFarCustom: '', workers: [], workerCustom: '', workItems: [], workItemCustom: '', tools: {}, toolsOther: {}, toolSelectedList: [], toolOtherName: '', crossLinePosition: '', phone: '', phoneCustom: '', camera: {}, cameraOtherName: '', cameraOtherVal: '', otherRemarkV2: {}, otherCount: 0, supplementNote: '' }; },
+                createDefaultPlan: function() { return { date: this.getTomorrow(), planType: '点内检查', windowType: '', timeStart: '', timeEnd: '', lineName: '', direction: [], startStation: '', endStation: '', startContains: false, endContains: false, mileageStart: '', mileageEnd: '', trackNo: '', switchNo: '', registerStation: '', stationGuardStation: [], gateIn: '', gateOut: '', gateBackupList: [], leader: '', leaderCustom: '', guardStationList: [], guardStationCustom: '', guardSiteList: [], guardSiteCustom: '', guardFarList: [], guardFarCustom: '', workers: [], workerCustom: '', workItems: [], workItemCustom: '', tools: {}, toolsOther: {}, toolSelectedList: [], toolOtherName: '', crossLinePosition: '', phone: '', phoneCustom: '', camera: {}, cameraOtherName: '', cameraOtherVal: '', otherRemarkV2: {}, otherCount: 0, supplementNote: '', needTruck: '', truckDetail: '' }; },
                 addPlan: function() { this.plans.push(this.createDefaultPlan()); this.currentPlanIndex = this.plans.length - 1; this.saveToLocal(); this.refreshPreview(); },
                 copyCurrentPlan: function() { var p = this.currentPlan; if (!p) { alert('请先选择要复制的计划'); return; } var copy = deepClone(p); copy.date = this.getTomorrow(); copy.timeStart = ''; copy.timeEnd = ''; copy.tools = {}; copy.toolsOther = {}; copy.toolSelectedList = []; copy.guardStationList = []; copy.guardSiteList = []; copy.guardFarList = []; copy.workers = []; copy.workItems = []; this.plans.push(copy); this.currentPlanIndex = this.plans.length - 1; this.saveToLocal(); this.refreshPreview(); this.copyMsg = '✅ 已复制当前计划'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 2000); },
                 deleteCurrentPlan: function() { if (this.plans.length <= 1) { alert('至少保留一条计划'); return; } var idx = this.currentPlanIndex; if (!confirm('确认删除「计划 ' + (idx + 1) + '」吗？')) return; this.plans.splice(idx, 1); if (idx >= this.plans.length) { this.currentPlanIndex = this.plans.length - 1; } else { this.currentPlanIndex = idx; } this.saveToLocal(); this.refreshPreview(); this.copyMsg = '🗑️ 已删除计划 ' + (idx + 1); var self = this; setTimeout(function() { self.copyMsg = ''; }, 2000); },
@@ -639,11 +659,13 @@
                     var toolStr = Object.keys(allTools).filter(function(k) { return allTools[k] && allTools[k].toString().trim(); }).map(function(k) { return k + allTools[k]; }).join('、');
                     add('作业机具', toolStr);
                     if (plan.crossLinePosition && plan.crossLinePosition.trim()) { add('跨线位置', plan.crossLinePosition.trim()); } var phoneFinal = plan.phone === '__custom__' ? (plan.phoneCustom || '') : (plan.phone || ''); add('定位手机', phoneFinal); var camArr = Object.keys(plan.camera || {}).filter(function(k) { return plan.camera[k] && plan.camera[k].trim(); }).map(function(k) { return k + plan.camera[k]; }); if (plan.cameraOtherName && plan.cameraOtherVal) camArr.push(plan.cameraOtherName + plan.cameraOtherVal); add('执法仪编号', camArr.length ? camArr.join('；') : ''); var allWorkers = new Set(); (plan.workers || []).forEach(function(w) { if (w && w !== '__custom__') allWorkers.add(w); }); if (leaderFinal) allWorkers.add(leaderFinal); (plan.guardSiteList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); }); (plan.guardFarList || []).forEach(function(n) { if (n && n !== '__custom__') allWorkers.add(n); }); if (allWorkers.size) add('作业人员', Array.from(allWorkers).join('、')); var roleSet = new Set(); if (leaderFinal && leaderFinal.trim()) roleSet.add(leaderFinal.trim()); (plan.guardStationList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); }); (plan.guardSiteList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); }); (plan.guardFarList || []).forEach(function(n) { if (n && n.trim() && n !== '__custom__') roleSet.add(n.trim()); }); var selectedWorkers = new Set((plan.workers || []).filter(function(w) { return w && w !== '__custom__'; })); var otherList = this.fixedWorkerOptions.filter(function(w) { return !roleSet.has(w) && !selectedWorkers.has(w); }); var otherItems = []; otherList.forEach(function(name) { var remark = (plan.otherRemarkV2 && plan.otherRemarkV2[name]) || ''; otherItems.push(remark.trim() ? name + '(' + remark.trim() + ')' : name); }); if (otherItems.length) add('其他人员', otherItems.join('、'));
+                    if (plan.needTruck === '是') add('是否需要工程车配合', '是，' + (plan.truckDetail || '').trim());
+                    if (plan.needTruck === '否') add('是否需要工程车配合', '否');
                     if (plan.supplementNote && plan.supplementNote.trim()) add('补充说明', plan.supplementNote.trim());
                     var html = ''; items.forEach(function(item) { html += '<div><span class="label">' + item.label + '</span>：<span class="value">' + item.value + '</span></div>'; }); return html; },
                 copyRichText: function() { var html = this.richTextContent; if (!html || html.indexOf('湖口检查工区') === -1) { alert('请先点击「生成计划」生成内容'); return; } var self = this; if (navigator.clipboard && navigator.clipboard.write) { var blob = new Blob([html], { type: 'text/html' }); navigator.clipboard.write([new ClipboardItem({ 'text/html': blob })]).then(function() { self.copyMsg = '✅ 富文本已复制'; setTimeout(function() { self.copyMsg = ''; }, 3000); }).catch(function() { self.fallbackCopyRichText(html); }); } else { this.fallbackCopyRichText(html); } },
                 fallbackCopyRichText: function(html) { var div = document.createElement('div'); div.innerHTML = html; var text = div.textContent || div.innerText || ''; var lines = text.split('\n').filter(function(line) { return line.trim(); }); var formattedText = lines.join('\n'); if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(formattedText).then(function() { this.copyMsg = '✅ 已复制纯文本'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 3000); }.bind(this)).catch(function() { this.fallbackCopy(formattedText); }.bind(this)); } else { this.fallbackCopy(formattedText); } },
-                generatePlan: function() { var p = this.currentPlan; if (!p) { alert('请先添加计划'); return; } this.copyMsg = '✅ 计划已生成'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 3000); this.saveToLocal(); this.refreshPreview(); },
+                generatePlan: function() { var p = this.currentPlan; if (!p) { alert('请先添加计划'); return; } if (p.needTruck === '是' && (!p.truckDetail || !p.truckDetail.trim())) { alert('已选择「需要工程车配合」，请填写工程车配合内容'); return; } this.copyMsg = '✅ 计划已生成'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 3000); this.saveToLocal(); this.refreshPreview(); },
                 fallbackCopy: function(text) { var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); this.copyMsg = '✅ 已复制'; var self = this; setTimeout(function() { self.copyMsg = ''; }, 3000); } catch (e) { alert('复制失败，请手动选中预览区文字复制。'); } document.body.removeChild(ta); },
                 resetForm: function() { if (!confirm('重置将清空所有数据，确认吗？')) return; this.plans = [this.createDefaultPlan()]; this.currentPlanIndex = 0; this.copyMsg = ''; this.richTextContent = ''; localStorage.removeItem('hukou_plans'); localStorage.removeItem('hukou_plan_index'); this.refreshPreview(); },
                 onPlanTypeChange: function() { var p = this.currentPlan; if (!p) return; if (!this.isPointIn) p.windowType = ''; if (!this.showRegisterStation) p.registerStation = ''; this.saveToLocal(); this.refreshPreview(); },
@@ -662,6 +684,7 @@
                 pushCurrentPlanToDingTalk: function() {
                     var plan = this.currentPlan;
                     if (!plan) { alert('请先填写计划信息'); return; }
+                    if (plan.needTruck === '是' && (!plan.truckDetail || !plan.truckDetail.trim())) { alert('已选择「需要工程车配合」，请填写工程车配合内容'); return; }
                     var md = '**湖口检查工区' + this.getDateTitleStr() + '计划（共1条计划）**\n\n';
                     md += '---\n\n';
                     md += this.buildPlanMarkdown(plan, this.currentPlanIndex + 1);
@@ -669,6 +692,12 @@
                 },
                 pushAllPlansToDingTalk: function() {
                     if (!this.plans || this.plans.length === 0) { alert('请先添加计划'); return; }
+                    for (var i = 0; i < this.plans.length; i++) {
+                        if (this.plans[i].needTruck === '是' && (!this.plans[i].truckDetail || !this.plans[i].truckDetail.trim())) {
+                            alert('「计划 ' + (i + 1) + '」已选择「需要工程车配合」，请填写工程车配合内容');
+                            return;
+                        }
+                    }
                     var self = this;
                     var md = '**湖口检查工区' + this.getDateTitleStr() + '计划（共' + this.plans.length + '条计划）**\n\n';
                     md += '---\n\n';
@@ -795,6 +824,8 @@
                         }
                     });
                     if (otherItems.length) md += '**其他人员：** ' + otherItems.join('、') + '\n\n';
+                    if (plan.needTruck === '是') md += '**是否需要工程车配合：** 是，' + (plan.truckDetail || '').trim() + '\n\n';
+                    if (plan.needTruck === '否') md += '**是否需要工程车配合：** 否\n\n';
                     if (plan.supplementNote && plan.supplementNote.trim()) md += '**补充说明：** ' + plan.supplementNote.trim() + '\n\n';
                     return md;
                 },
